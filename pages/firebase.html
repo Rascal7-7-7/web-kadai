@@ -1,0 +1,567 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Firebase | プログラミング言語図鑑</title>
+    <link rel="icon" type="image/png" href="../assets/icons/book.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/main.css" />
+    <style>
+      /* Detail page specific styles */
+      .detail-main {
+        padding-top: 120px;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding-left: 2rem;
+        padding-right: 2rem;
+      }
+
+      .detail-header {
+        text-align: center;
+        margin-bottom: 3rem;
+        padding: 2rem;
+        border: 2px solid #00ff41;
+        background: rgba(0, 255, 65, 0.05);
+        box-shadow: 0 0 30px rgba(0, 255, 65, 0.3);
+      }
+
+      .detail-logo {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+        text-shadow: 0 0 20px #00ff41;
+      }
+
+      .detail-title {
+        font-size: 3rem;
+        color: #00ff41;
+        text-shadow: 0 0 20px #00ff41;
+        margin-bottom: 0.5rem;
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      .detail-subtitle {
+        font-size: 1.2rem;
+        color: #00cc33;
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      .detail-section {
+        margin-bottom: 3rem;
+        padding: 2rem;
+        border: 2px solid #00ff41;
+        background: rgba(0, 0, 0, 0.8);
+        box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+      }
+
+      .detail-section h2 {
+        color: #00ff41;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        text-shadow: 0 0 10px #00ff41;
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      .detail-section h2::before {
+        content: "// ";
+        color: #00cc33;
+      }
+
+      .info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+
+      .info-item {
+        padding: 1rem;
+        border: 1px solid #00ff41;
+        background: rgba(0, 255, 65, 0.05);
+      }
+
+      .info-label {
+        color: #00cc33;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      .info-value {
+        color: #00ff41;
+        font-weight: 600;
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      .features-list {
+        list-style: none;
+      }
+
+      .features-list li {
+        padding: 0.5rem 0;
+        color: #00cc33;
+        border-bottom: 1px solid rgba(0, 255, 65, 0.2);
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      .features-list li::before {
+        content: "> ";
+        color: #00ff41;
+        font-weight: bold;
+      }
+
+      .code-block {
+        background: rgba(0, 0, 0, 0.9);
+        border: 2px solid #00ff41;
+        padding: 1.5rem;
+        margin: 1rem 0;
+        overflow-x: auto;
+        box-shadow: inset 0 0 20px rgba(0, 255, 65, 0.1);
+      }
+
+      .code-block pre {
+        color: #00ff41;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.9rem;
+      }
+
+      .uses-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+      }
+
+      .use-item {
+        padding: 1rem;
+        border: 1px solid #00ff41;
+        background: rgba(0, 255, 65, 0.05);
+        text-align: center;
+        color: #00cc33;
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      .back-link {
+        display: inline-block;
+        padding: 1rem 2rem;
+        background: rgba(0, 255, 65, 0.1);
+        border: 2px solid #00ff41;
+        color: #00ff41;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      .back-link:hover {
+        background: rgba(0, 255, 65, 0.2);
+        box-shadow: 0 0 25px rgba(0, 255, 65, 0.5);
+        transform: scale(1.05);
+      }
+
+      @media (max-width: 768px) {
+        .detail-main {
+          padding-left: 1rem;
+          padding-right: 1rem;
+        }
+
+        .detail-title {
+          font-size: 2rem;
+        }
+
+        .detail-section {
+          padding: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="container">
+        <div class="header-content">
+          <div class="logo">
+            <div class="logo-icon">💻</div>
+            <div class="logo-text">
+              <h1
+                data-ja="プログラミング言語図鑑"
+                data-en="Programming Language Encyclopedia"
+              >
+                プログラミング言語図鑑
+              </h1>
+              <p
+                data-ja="プログラミング言語図鑑"
+                data-en="Programming Language Encyclopedia"
+              >
+                Programming Language Encyclopedia
+              </p>
+            </div>
+          </div>
+
+          <div class="search-container">
+            <input
+              type="text"
+              id="search-input"
+              placeholder="言語を検索..."
+              class="search-input"
+              data-ja="言語を検索..."
+              data-en="Search languages..."
+            />
+            <div class="search-icon">🔍</div>
+          </div>
+
+          <div class="header-controls">
+            <!-- Hacker Experience Button with Effects -->
+            <a href="../hacker.html" id="hacker-btn" class="hacker-btn">
+              <span class="hacker-icon">💀</span>
+              <span
+                class="hacker-text"
+                data-ja="ハッカー体験"
+                data-en="Hacker Experience"
+                >HACK</span
+              >
+              <div class="hacker-particles"></div>
+            </a>
+            <button
+              id="lang-toggle"
+              class="lang-toggle"
+              data-ja="🌐 EN"
+              data-en="🌐 JA"
+            >
+              🌐 EN
+            </button>
+            <button id="menu-toggle" class="menu-toggle">☰</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Navigation Menu -->
+    <nav id="nav-menu" class="nav-menu">
+      <div class="nav-content">
+        <button id="nav-close" class="nav-close">✕</button>
+        <div class="nav-header">
+          <h2 data-ja="メニュー" data-en="Menu">メニュー</h2>
+        </div>
+        <ul class="nav-links">
+          <li>
+            <a
+              href="../index.html#home"
+              class="nav-link"
+              data-ja="🏠 ホーム"
+              data-en="🏠 Home"
+              >🏠 ホーム</a
+            >
+          </li>
+          <li>
+            <a
+              href="../index.html#categories"
+              class="nav-link"
+              data-ja="📂 カテゴリ"
+              data-en="📂 Categories"
+              >📂 カテゴリ</a
+            >
+          </li>
+          <li>
+            <a
+              href="../hacker.html"
+              class="nav-link"
+              data-ja="💀 ハッカー体験"
+              data-en="💀 Hacker Experience"
+              >💀 ハッカー体験</a
+            >
+          </li>
+          <li>
+            <a
+              href="../index.html#about"
+              class="nav-link"
+              data-ja="ℹ️ このサイトについて"
+              data-en="ℹ️ About this site"
+              >ℹ️ このサイトについて</a
+            >
+          </li>
+        </ul>
+        <div class="nav-categories">
+          <h3 data-ja="カテゴリ別に探索" data-en="Explore by Category">
+            カテゴリ別に探索
+          </h3>
+          <ul class="category-links">
+            <li>
+              <a
+                href="../index.html#app-development"
+                class="category-link"
+                data-category="app-development"
+                data-ja="📱 アプリ開発"
+                data-en="📱 App Development"
+                >📱 アプリ開発</a
+              >
+            </li>
+            <li>
+              <a
+                href="../index.html#server-side"
+                class="category-link"
+                data-category="server-side"
+                data-ja="🖥️ サーバーサイド"
+                data-en="🖥️ Server-side"
+                >🖥️ サーバーサイド</a
+              >
+            </li>
+            <li>
+              <a
+                href="../index.html#web-development"
+                class="category-link"
+                data-category="web-development"
+                data-ja="🌐 Web開発"
+                data-en="🌐 Web Development"
+                >🌐 Web開発</a
+              >
+            </li>
+            <li>
+              <a
+                href="../index.html#system"
+                class="category-link"
+                data-category="system"
+                data-ja="⚙️ システム"
+                data-en="⚙️ System"
+                >⚙️ システム</a
+              >
+            </li>
+            <li>
+              <a
+                href="../index.html#database"
+                class="category-link"
+                data-category="database"
+                data-ja="🗃️ データベース"
+                data-en="🗃️ Database"
+                >🗃️ データベース</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="detail-main">
+      <div class="detail-header">
+        <div class="detail-logo">
+          <img
+            src="../assets/logos/Firebase.png"
+            alt="Firebase"
+            style="width: 80px; height: 80px; object-fit: contain"
+          />
+        </div>
+        <h1 class="detail-title">Firebase</h1>
+        <p
+          class="detail-subtitle"
+          data-ja="Googleが提供するモバイル・Webアプリ開発プラットフォーム。バックエンド機能を簡単に実装"
+          data-en="Mobile and web app development platform by Google. Easily implement backend features."
+        >
+          Googleが提供するモバイル・Webアプリ開発プラットフォーム。バックエンド機能を簡単に実装
+        </p>
+      </div>
+
+      <div class="detail-section">
+        <h2 data-ja="基本情報" data-en="Basic Information">基本情報</h2>
+        <div class="info-grid">
+          <div class="info-item">
+            <div class="info-label" data-ja="開発者" data-en="Developer">
+              開発者
+            </div>
+            <div class="info-value">Google</div>
+          </div>
+          <div class="info-item">
+            <div
+              class="info-label"
+              data-ja="初回リリース"
+              data-en="First Release"
+            >
+              初回リリース
+            </div>
+            <div class="info-value">2011年</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label" data-ja="パラダイム" data-en="Paradigm">
+              パラダイム
+            </div>
+            <div class="info-value">BaaS (Backend as a Service)</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label" data-ja="難易度" data-en="Difficulty">
+              難易度
+            </div>
+            <div class="info-value" data-ja="普通" data-en="Medium">普通</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <h2 data-ja="特徴" data-en="Features">特徴</h2>
+        <ul class="features-list">
+          <li data-ja="リアルタイムデータベース" data-en="Real-time Database">
+            リアルタイムデータベース
+          </li>
+          <li data-ja="認証システム" data-en="Authentication System">
+            認証システム
+          </li>
+          <li data-ja="クラウドストレージ" data-en="Cloud Storage">
+            クラウドストレージ
+          </li>
+          <li data-ja="ホスティング" data-en="Hosting">ホスティング</li>
+          <li data-ja="プッシュ通知" data-en="Push Notifications">
+            プッシュ通知
+          </li>
+          <li data-ja="アナリティクス" data-en="Analytics">アナリティクス</li>
+          <li data-ja="クラウド関数" data-en="Cloud Functions">クラウド関数</li>
+        </ul>
+      </div>
+
+      <div class="detail-section">
+        <h2 data-ja="主な用途" data-en="Main Uses">主な用途</h2>
+        <div class="uses-grid">
+          <div class="use-item" data-ja="モバイルアプリ" data-en="Mobile Apps">
+            モバイルアプリ
+          </div>
+          <div class="use-item" data-ja="Webアプリ" data-en="Web Apps">
+            Webアプリ
+          </div>
+          <div
+            class="use-item"
+            data-ja="リアルタイムアプリ"
+            data-en="Real-time Apps"
+          >
+            リアルタイムアプリ
+          </div>
+          <div class="use-item" data-ja="チャットアプリ" data-en="Chat Apps">
+            チャットアプリ
+          </div>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <h2 data-ja="サンプルコード" data-en="Sample Code">サンプルコード</h2>
+        <div class="code-block">
+          <pre>
+// Firebase初期化
+import { initializeApp } from 'firebase/app';
+import { getFirestore, collection, addDoc, onSnapshot } from 'firebase/firestore';
+import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from 'firebase/auth';
+
+// Firebase設定
+const firebaseConfig = {
+  apiKey: "your-api-key",
+  authDomain: "your-project.firebaseapp.com",
+  projectId: "your-project-id",
+  storageBucket: "your-project.appspot.com",
+  messagingSenderId: "123456789",
+  appId: "your-app-id"
+};
+
+// Firebaseアプリを初期化
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+
+// ユーザー認証
+async function signUp(email, password) {
+  try {
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    console.log('ユーザー作成成功:', userCredential.user);
+  } catch (error) {
+    console.error('エラー:', error.message);
+  }
+}
+
+async function signIn(email, password) {
+  try {
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    console.log('ログイン成功:', userCredential.user);
+  } catch (error) {
+    console.error('エラー:', error.message);
+  }
+}
+
+// Firestoreデータベース操作
+async function addMessage(message) {
+  try {
+    const docRef = await addDoc(collection(db, "messages"), {
+      text: message,
+      timestamp: new Date(),
+      userId: auth.currentUser?.uid
+    });
+    console.log("メッセージ追加:", docRef.id);
+  } catch (error) {
+    console.error("エラー:", error);
+  }
+}
+
+// リアルタイムデータ取得
+function listenToMessages() {
+  const unsubscribe = onSnapshot(collection(db, "messages"), (snapshot) => {
+    snapshot.docChanges().forEach((change) => {
+      if (change.type === "added") {
+        console.log("新しいメッセージ:", change.doc.data());
+      }
+      if (change.type === "modified") {
+        console.log("更新されたメッセージ:", change.doc.data());
+      }
+      if (change.type === "removed") {
+        console.log("削除されたメッセージ:", change.doc.data());
+      }
+    });
+  });
+  
+  return unsubscribe; // リスナーを停止するための関数
+}
+
+// 使用例
+signUp("user@example.com", "password123");
+addMessage("Hello Firebase!");
+const unsubscribe = listenToMessages();
+                </pre
+          >
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <h2 data-ja="人気度" data-en="Popularity">人気度</h2>
+        <div class="info-grid">
+          <div class="info-item">
+            <div
+              class="info-label"
+              data-ja="国内人気度"
+              data-en="Domestic Popularity"
+            >
+              国内人気度
+            </div>
+            <div class="info-value">★★★★☆</div>
+          </div>
+          <div class="info-item">
+            <div
+              class="info-label"
+              data-ja="世界人気度"
+              data-en="Global Popularity"
+            >
+              世界人気度
+            </div>
+            <div class="info-value">★★★★★</div>
+          </div>
+        </div>
+      </div>
+
+      <a href="../index.html" class="back-link">← 一覧に戻る</a>
+    </main>
+
+    <!-- Enhanced Custom Cursor -->
+    <div id="cursor" class="cursor"></div>
+    <div id="cursor-trail" class="cursor-trail"></div>
+    <div id="cursor-glow" class="cursor-glow"></div>
+    <div id="cursor-particles" class="cursor-particles"></div>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/language-details.js"></script>
+  </body>
+</html>

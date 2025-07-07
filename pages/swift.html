@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Swift | プログラミング言語図鑑</title>
+    <link rel="icon" type="image/png" href="../assets/icons/book.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/main.css" />
+    <style>
+      /* Detail page specific styles */
+      .detail-main {
+        padding-top: 120px;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding-left: 2rem;
+        padding-right: 2rem;
+      }
+
+      .detail-header {
+        text-align: center;
+        margin-bottom: 3rem;
+        padding: 2rem;
+        border: 2px solid #00ff41;
+        background: rgba(0, 255, 65, 0.05);
+        box-shadow: 0 0 30px rgba(0, 255, 65, 0.3);
+      }
+
+      .detail-logo {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+        text-shadow: 0 0 20px #00ff41;
+      }
+
+      .detail-title {
+        font-size: 3rem;
+        color: #00ff41;
+        text-shadow: 0 0 20px #00ff41;
+        margin-bottom: 0.5rem;
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      .detail-subtitle {
+        font-size: 1.2rem;
+        color: #00cc33;
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      .detail-section {
+        margin-bottom: 3rem;
+        padding: 2rem;
+        border: 2px solid #00ff41;
+        background: rgba(0, 0, 0, 0.8);
+        box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+      }
+
+      .detail-section h2 {
+        color: #00ff41;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        text-shadow: 0 0 10px #00ff41;
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      .detail-section h2::before {
+        content: "// ";
+        color: #00cc33;
+      }
+
+      .info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+
+      .info-item {
+        padding: 1rem;
+        border: 1px solid #00ff41;
+        background: rgba(0, 255, 65, 0.05);
+      }
+
+      .info-label {
+        color: #00cc33;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      .info-value {
+        color: #00ff41;
+        font-weight: 600;
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      .features-list {
+        list-style: none;
+      }
+
+      .features-list li {
+        padding: 0.5rem 0;
+        color: #00cc33;
+        border-bottom: 1px solid rgba(0, 255, 65, 0.2);
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      .features-list li::before {
+        content: "> ";
+        color: #00ff41;
+        font-weight: bold;
+      }
+
+      .code-block {
+        background: rgba(0, 0, 0, 0.9);
+        border: 2px solid #00ff41;
+        padding: 1.5rem;
+        margin: 1rem 0;
+        overflow-x: auto;
+        box-shadow: inset 0 0 20px rgba(0, 255, 65, 0.1);
+      }
+
+      .code-block pre {
+        color: #00ff41;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.9rem;
+      }
+
+      .uses-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+      }
+
+      .use-item {
+        padding: 1rem;
+        border: 1px solid #00ff41;
+        background: rgba(0, 255, 65, 0.05);
+        text-align: center;
+        color: #00cc33;
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      .back-link {
+        display: inline-block;
+        padding: 1rem 2rem;
+        background: rgba(0, 255, 65, 0.1);
+        border: 2px solid #00ff41;
+        color: #00ff41;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      .back-link:hover {
+        background: rgba(0, 255, 65, 0.2);
+        box-shadow: 0 0 25px rgba(0, 255, 65, 0.5);
+        transform: scale(1.05);
+      }
+
+      @media (max-width: 768px) {
+        .detail-main {
+          padding-left: 1rem;
+          padding-right: 1rem;
+        }
+
+        .detail-title {
+          font-size: 2rem;
+        }
+
+        .detail-section {
+          padding: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="container">
+        <div class="header-content">
+          <div class="logo">
+            <div class="logo-icon">💻</div>
+            <div class="logo-text">
+              <h1
+                data-ja="プログラミング言語図鑑"
+                data-en="Programming Language Encyclopedia"
+              >
+                プログラミング言語図鑑
+              </h1>
+              <p
+                data-ja="プログラミング言語図鑑"
+                data-en="Programming Language Encyclopedia"
+              >
+                Programming Language Encyclopedia
+              </p>
+            </div>
+          </div>
+
+          <div class="search-container">
+            <input
+              type="text"
+              id="search-input"
+              placeholder="言語を検索..."
+              class="search-input"
+              data-ja="言語を検索..."
+              data-en="Search languages..."
+            />
+            <div class="search-icon">🔍</div>
+          </div>
+
+          <div class="header-controls">
+            <!-- Hacker Experience Button with Effects -->
+            <a href="../hacker.html" id="hacker-btn" class="hacker-btn">
+              <span class="hacker-icon">💀</span>
+              <span
+                class="hacker-text"
+                data-ja="ハッカー体験"
+                data-en="Hacker Experience"
+                >HACK</span
+              >
+              <div class="hacker-particles"></div>
+            </a>
+            <button
+              id="lang-toggle"
+              class="lang-toggle"
+              data-ja="🌐 EN"
+              data-en="🌐 JA"
+            >
+              🌐 EN
+            </button>
+            <button id="menu-toggle" class="menu-toggle">☰</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Navigation Menu -->
+    <nav id="nav-menu" class="nav-menu">
+      <div class="nav-content">
+        <button id="nav-close" class="nav-close">✕</button>
+        <div class="nav-header">
+          <h2 data-ja="メニュー" data-en="Menu">メニュー</h2>
+        </div>
+        <ul class="nav-links">
+          <li>
+            <a
+              href="../index.html#home"
+              class="nav-link"
+              data-ja="🏠 ホーム"
+              data-en="🏠 Home"
+              >🏠 ホーム</a
+            >
+          </li>
+          <li>
+            <a
+              href="../index.html#categories"
+              class="nav-link"
+              data-ja="📂 カテゴリ"
+              data-en="📂 Categories"
+              >📂 カテゴリ</a
+            >
+          </li>
+          <li>
+            <a
+              href="../hacker.html"
+              class="nav-link"
+              data-ja="💀 ハッカー体験"
+              data-en="💀 Hacker Experience"
+              >💀 ハッカー体験</a
+            >
+          </li>
+          <li>
+            <a
+              href="../index.html#about"
+              class="nav-link"
+              data-ja="ℹ️ このサイトについて"
+              data-en="ℹ️ About this site"
+              >ℹ️ このサイトについて</a
+            >
+          </li>
+        </ul>
+        <div class="nav-categories">
+          <h3 data-ja="カテゴリ別に探索" data-en="Explore by Category">
+            カテゴリ別に探索
+          </h3>
+          <ul class="category-links">
+            <li>
+              <a
+                href="../index.html#app-development"
+                class="category-link"
+                data-category="app-development"
+                data-ja="📱 アプリ開発"
+                data-en="📱 App Development"
+                >📱 アプリ開発</a
+              >
+            </li>
+            <li>
+              <a
+                href="../index.html#server-side"
+                class="category-link"
+                data-category="server-side"
+                data-ja="🖥️ サーバーサイド"
+                data-en="🖥️ Server-side"
+                >🖥️ サーバーサイド</a
+              >
+            </li>
+            <li>
+              <a
+                href="../index.html#web-development"
+                class="category-link"
+                data-category="web-development"
+                data-ja="🌐 Web開発"
+                data-en="🌐 Web Development"
+                >🌐 Web開発</a
+              >
+            </li>
+            <li>
+              <a
+                href="../index.html#system"
+                class="category-link"
+                data-category="system"
+                data-ja="⚙️ システム"
+                data-en="⚙️ System"
+                >⚙️ システム</a
+              >
+            </li>
+            <li>
+              <a
+                href="../index.html#database"
+                class="category-link"
+                data-category="database"
+                data-ja="🗃️ データベース"
+                data-en="🗃️ Database"
+                >🗃️ データベース</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="detail-main">
+      <div class="detail-header">
+        <div class="detail-logo">
+          <img
+            src="../assets/logos/Swift.png"
+            alt="Swift"
+            style="width: 80px; height: 80px; object-fit: contain"
+          />
+        </div>
+        <h1 class="detail-title" data-ja="Swift" data-en="Swift">Swift</h1>
+        <p
+          class="detail-subtitle"
+          data-ja="AppleがiOS/macOSアプリ開発のために開発したモダンなプログラミング言語"
+          data-en="Modern programming language developed by Apple for iOS/macOS app development"
+        >
+          AppleがiOS/macOSアプリ開発のために開発したモダンなプログラミング言語
+        </p>
+      </div>
+
+      <div class="detail-section">
+        <h2 data-ja="基本情報" data-en="Basic Information">基本情報</h2>
+        <div class="info-grid">
+          <div class="info-item">
+            <div class="info-label" data-ja="開発者" data-en="Developer">
+              開発者
+            </div>
+            <div class="info-value">Apple</div>
+          </div>
+          <div class="info-item">
+            <div
+              class="info-label"
+              data-ja="初回リリース"
+              data-en="First Release"
+            >
+              初回リリース
+            </div>
+            <div class="info-value">2014年</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label" data-ja="パラダイム" data-en="Paradigm">
+              パラダイム
+            </div>
+            <div
+              class="info-value"
+              data-ja="オブジェクト指向、関数型、プロトコル指向"
+              data-en="Object-oriented, Functional, Protocol-oriented"
+            >
+              オブジェクト指向、関数型、プロトコル指向
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-label" data-ja="難易度" data-en="Difficulty">
+              難易度
+            </div>
+            <div class="info-value" data-ja="普通" data-en="Medium">普通</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <h2 data-ja="特徴" data-en="Features">特徴</h2>
+        <ul class="features-list">
+          <li data-ja="型安全性" data-en="Type safety">型安全性</li>
+          <li data-ja="オプショナル型" data-en="Optional types">
+            オプショナル型
+          </li>
+          <li
+            data-ja="プロトコル指向プログラミング"
+            data-en="Protocol-oriented programming"
+          >
+            プロトコル指向プログラミング
+          </li>
+          <li data-ja="高速な実行速度" data-en="Fast execution speed">
+            高速な実行速度
+          </li>
+          <li data-ja="Playgroundでの学習" data-en="Learning with Playground">
+            Playgroundでの学習
+          </li>
+          <li data-ja="SwiftUIフレームワーク" data-en="SwiftUI framework">
+            SwiftUIフレームワーク
+          </li>
+          <li
+            data-ja="メモリ管理の自動化"
+            data-en="Automatic memory management"
+          >
+            メモリ管理の自動化
+          </li>
+        </ul>
+      </div>
+
+      <div class="detail-section">
+        <h2 data-ja="主な用途" data-en="Main Uses">主な用途</h2>
+        <div class="uses-grid">
+          <div class="use-item" data-ja="iOSアプリ" data-en="iOS Apps">
+            iOSアプリ
+          </div>
+          <div class="use-item" data-ja="macOSアプリ" data-en="macOS Apps">
+            macOSアプリ
+          </div>
+          <div class="use-item" data-ja="watchOSアプリ" data-en="watchOS Apps">
+            watchOSアプリ
+          </div>
+          <div class="use-item" data-ja="tvOSアプリ" data-en="tvOS Apps">
+            tvOSアプリ
+          </div>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <h2 data-ja="サンプルコード" data-en="Sample Code">サンプルコード</h2>
+        <div class="code-block">
+          <pre>
+import Foundation
+
+// Hello World
+print("Hello, World!")
+
+// 変数と定数
+var message = "Swift言語"
+let number = 42
+let pi = 3.14159
+
+print("\(message) - \(number) - \(pi)")
+
+// 配列の使用
+var numbers = [1, 2, 3, 4, 5]
+for (index, num) in numbers.enumerated() {
+    print("Number[\(index)]: \(num)")
+}
+
+// 辞書の使用
+var person = [
+    "name": "田中太郎",
+    "age": "25",
+    "city": "東京"
+]
+
+for (key, value) in person {
+    print("\(key): \(value)")
+}
+
+// 関数の定義
+func add(_ a: Int, _ b: Int) -> Int {
+    return a + b
+}
+
+let result = add(10, 20)
+print("10 + 20 = \(result)")
+
+// クラスの定義
+class Person {
+    var name: String
+    var age: Int
+    
+    init(name: String, age: Int) {
+        self.name = name
+        self.age = age
+    }
+    
+    func introduce() -> String {
+        return "こんにちは、\(name)です。\(age)歳です。"
+    }
+    
+    func isAdult() -> Bool {
+        return age >= 18
+    }
+}
+
+// オブジェクトの作成
+let person1 = Person(name: "佐藤花子", age: 30)
+print(person1.introduce())
+print("成人: \(person1.isAdult())")
+
+// 構造体の定義
+struct Point {
+    var x: Double
+    var y: Double
+    
+    func distance(to other: Point) -> Double {
+        let dx = x - other.x
+        let dy = y - other.y
+        return sqrt(dx * dx + dy * dy)
+    }
+}
+
+let point1 = Point(x: 0, y: 0)
+let point2 = Point(x: 3, y: 4)
+print("距離: \(point1.distance(to: point2))")
+
+// オプショナル型
+var optionalName: String? = "Swift"
+if let name = optionalName {
+    print("名前: \(name)")
+} else {
+    print("名前が設定されていません")
+}
+
+// 高階関数
+let squares = numbers.map { $0 * $0 }
+print("二乗: \(squares)")
+
+let evens = numbers.filter { $0 % 2 == 0 }
+print("偶数: \(evens)")
+
+let sum = numbers.reduce(0, +)
+print("合計: \(sum)")
+
+// プロトコルの定義
+protocol Drawable {
+    func draw()
+}
+
+struct Circle: Drawable {
+    var radius: Double
+    
+    func draw() {
+        print("半径\(radius)の円を描画")
+    }
+}
+
+struct Rectangle: Drawable {
+    var width: Double
+    var height: Double
+    
+    func draw() {
+        print("\(width)x\(height)の長方形を描画")
+    }
+}
+
+let shapes: [Drawable] = [
+    Circle(radius: 5.0),
+    Rectangle(width: 10.0, height: 8.0)
+]
+
+for shape in shapes {
+    shape.draw()
+}
+
+// エラーハンドリング
+enum FileError: Error {
+    case fileNotFound
+    case permissionDenied
+}
+
+func readFile(name: String) throws -> String {
+    if name.isEmpty {
+        throw FileError.fileNotFound
+    }
+    return "ファイル内容: \(name)"
+}
+
+do {
+    let content = try readFile(name: "sample.txt")
+    print(content)
+} catch FileError.fileNotFound {
+    print("ファイルが見つかりません")
+} catch {
+    print("エラー: \(error)")
+}
+
+// クロージャ
+let greetingClosure = { (name: String) -> String in
+    return "Hello, \(name)!"
+}
+
+print(greetingClosure("Swift"))
+                </pre
+          >
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <h2 data-ja="人気度" data-en="Popularity">人気度</h2>
+        <div class="info-grid">
+          <div class="info-item">
+            <div
+              class="info-label"
+              data-ja="国内人気度"
+              data-en="Domestic Popularity"
+            >
+              国内人気度
+            </div>
+            <div class="info-value">★★★☆☆</div>
+          </div>
+          <div class="info-item">
+            <div
+              class="info-label"
+              data-ja="世界人気度"
+              data-en="Global Popularity"
+            >
+              世界人気度
+            </div>
+            <div class="info-value">★★★★☆</div>
+          </div>
+        </div>
+      </div>
+
+      <a
+        href="../index.html"
+        class="back-link"
+        data-ja="← 一覧に戻る"
+        data-en="← Back to List"
+        ><span data-lang-text>← 一覧に戻る</span></a
+      >
+    </main>
+
+    <!-- Enhanced Custom Cursor -->
+    <div id="cursor" class="cursor"></div>
+    <div id="cursor-trail" class="cursor-trail"></div>
+    <div id="cursor-glow" class="cursor-glow"></div>
+    <div id="cursor-particles" class="cursor-particles"></div>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/language-details.js"></script>
+  </body>
+</html>

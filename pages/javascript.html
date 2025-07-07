@@ -1,0 +1,662 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JavaScript | プログラミング言語図鑑</title>
+    <link rel="icon" type="image/png" href="../assets/icons/book.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/main.css" />
+    <style>
+      /* Detail page specific styles */
+      .detail-main {
+        padding-top: 120px;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding-left: 2rem;
+        padding-right: 2rem;
+      }
+
+      .detail-header {
+        text-align: center;
+        margin-bottom: 3rem;
+        padding: 2rem;
+        border: 2px solid #00ff41;
+        background: rgba(0, 255, 65, 0.05);
+        box-shadow: 0 0 30px rgba(0, 255, 65, 0.3);
+      }
+
+      .detail-logo {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+        text-shadow: 0 0 20px #00ff41;
+      }
+
+      .detail-title {
+        font-size: 3rem;
+        color: #00ff41;
+        text-shadow: 0 0 20px #00ff41;
+        margin-bottom: 0.5rem;
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      .detail-subtitle {
+        font-size: 1.2rem;
+        color: #00cc33;
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      .detail-section {
+        margin-bottom: 3rem;
+        padding: 2rem;
+        border: 2px solid #00ff41;
+        background: rgba(0, 0, 0, 0.8);
+        box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+      }
+
+      .detail-section h2 {
+        color: #00ff41;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        text-shadow: 0 0 10px #00ff41;
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      .detail-section h2::before {
+        content: "// ";
+        color: #00cc33;
+      }
+
+      .info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+
+      .info-item {
+        padding: 1rem;
+        border: 1px solid #00ff41;
+        background: rgba(0, 255, 65, 0.05);
+      }
+
+      .info-label {
+        color: #00cc33;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      .info-value {
+        color: #00ff41;
+        font-weight: 600;
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      .features-list {
+        list-style: none;
+      }
+
+      .features-list li {
+        padding: 0.5rem 0;
+        color: #00cc33;
+        border-bottom: 1px solid rgba(0, 255, 65, 0.2);
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      .features-list li::before {
+        content: "> ";
+        color: #00ff41;
+        font-weight: bold;
+      }
+
+      .code-block {
+        background: rgba(0, 0, 0, 0.9);
+        border: 2px solid #00ff41;
+        padding: 1.5rem;
+        margin: 1rem 0;
+        overflow-x: auto;
+        box-shadow: inset 0 0 20px rgba(0, 255, 65, 0.1);
+      }
+
+      .code-block pre {
+        color: #00ff41;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.9rem;
+      }
+
+      .uses-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+      }
+
+      .use-item {
+        padding: 1rem;
+        border: 1px solid #00ff41;
+        background: rgba(0, 255, 65, 0.05);
+        text-align: center;
+        color: #00cc33;
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      .back-link {
+        display: inline-block;
+        padding: 1rem 2rem;
+        background: rgba(0, 255, 65, 0.1);
+        border: 2px solid #00ff41;
+        color: #00ff41;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      .back-link:hover {
+        background: rgba(0, 255, 65, 0.2);
+        box-shadow: 0 0 25px rgba(0, 255, 65, 0.5);
+        transform: scale(1.05);
+      }
+
+      .interactive-demo {
+        margin: 1rem 0;
+        padding: 1rem;
+        border: 2px solid #ffff00;
+        background: rgba(255, 255, 0, 0.05);
+      }
+
+      .demo-button {
+        padding: 0.5rem 1rem;
+        background: rgba(255, 255, 0, 0.1);
+        border: 2px solid #ffff00;
+        color: #ffff00;
+        font-family: "JetBrains Mono", monospace;
+        margin: 0.5rem;
+        transition: all 0.3s ease;
+      }
+
+      .demo-button:hover {
+        background: rgba(255, 255, 0, 0.2);
+        box-shadow: 0 0 15px rgba(255, 255, 0, 0.5);
+      }
+
+      @media (max-width: 768px) {
+        .detail-main {
+          padding-left: 1rem;
+          padding-right: 1rem;
+        }
+
+        .detail-title {
+          font-size: 2rem;
+        }
+
+        .detail-section {
+          padding: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="container">
+        <div class="header-content">
+          <div class="logo">
+            <div class="logo-icon">💻</div>
+            <div class="logo-text">
+              <h1
+                data-ja="プログラミング言語図鑑"
+                data-en="Programming Language Encyclopedia"
+              >
+                プログラミング言語図鑑
+              </h1>
+              <p
+                data-ja="プログラミング言語図鑑"
+                data-en="Programming Language Encyclopedia"
+              >
+                Programming Language Encyclopedia
+              </p>
+            </div>
+          </div>
+
+          <div class="search-container">
+            <input
+              type="text"
+              id="search-input"
+              placeholder="言語を検索..."
+              class="search-input"
+              data-ja-placeholder="言語を検索..."
+              data-en-placeholder="Search languages..."
+            />
+            <div class="search-icon">🔍</div>
+          </div>
+
+          <div class="header-controls">
+            <!-- Hacker Experience Button with Effects -->
+            <a href="../hacker.html" id="hacker-btn" class="hacker-btn">
+              <span class="hacker-icon">💀</span>
+              <span class="hacker-text">HACK</span>
+              <div class="hacker-particles"></div>
+            </a>
+            <button
+              id="lang-toggle"
+              class="lang-toggle"
+              data-ja="🌐 EN"
+              data-en="🌐 JA"
+            >
+              🌐 EN
+            </button>
+            <button id="menu-toggle" class="menu-toggle">☰</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Navigation Menu -->
+    <nav id="nav-menu" class="nav-menu">
+      <div class="nav-content">
+        <button id="nav-close" class="nav-close">✕</button>
+        <div class="nav-header">
+          <h2 data-ja="メニュー" data-en="Menu">メニュー</h2>
+        </div>
+        <ul class="nav-links">
+          <li>
+            <a
+              href="../index.html#home"
+              class="nav-link"
+              data-ja="🏠 ホーム"
+              data-en="🏠 Home"
+              >🏠 ホーム</a
+            >
+          </li>
+          <li>
+            <a
+              href="../index.html#categories"
+              class="nav-link"
+              data-ja="📂 カテゴリ"
+              data-en="📂 Categories"
+              >📂 カテゴリ</a
+            >
+          </li>
+          <li>
+            <a
+              href="../hacker.html"
+              class="nav-link"
+              data-ja="💀 ハッカー体験"
+              data-en="💀 Hacker Experience"
+              >💀 ハッカー体験</a
+            >
+          </li>
+          <li>
+            <a
+              href="../index.html#about"
+              class="nav-link"
+              data-ja="ℹ️ このサイトについて"
+              data-en="ℹ️ About this site"
+              >ℹ️ このサイトについて</a
+            >
+          </li>
+        </ul>
+
+        <div class="nav-categories">
+          <h3 data-ja="カテゴリ別に探索" data-en="Explore by Category">
+            カテゴリ別に探索
+          </h3>
+          <ul class="category-links">
+            <li>
+              <a
+                href="../index.html#app-development"
+                class="category-link"
+                data-category="app-development"
+                >📱 アプリ開発</a
+              >
+            </li>
+            <li>
+              <a
+                href="../index.html#server-side"
+                class="category-link"
+                data-category="server-side"
+                >🖥️ サーバーサイド</a
+              >
+            </li>
+            <li>
+              <a
+                href="../index.html#web-development"
+                class="category-link"
+                data-category="web-development"
+                >🌐 Web開発</a
+              >
+            </li>
+            <li>
+              <a
+                href="../index.html#system"
+                class="category-link"
+                data-category="system"
+                >⚙️ システム</a
+              >
+            </li>
+            <li>
+              <a
+                href="../index.html#database"
+                class="category-link"
+                data-category="database"
+                >🗃️ データベース</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="detail-main">
+      <div class="detail-header">
+        <div class="detail-logo">
+          <img
+            src="../assets/logos/javascript.png"
+            alt="JavaScript"
+            style="width: 80px; height: 80px; object-fit: contain"
+          />
+        </div>
+        <h1 class="detail-title" data-ja="JavaScript" data-en="JavaScript">
+          JavaScript
+        </h1>
+        <p
+          class="detail-subtitle"
+          data-ja="Webブラウザで動作する動的なプログラミング言語。現代のWeb開発に不可欠"
+          data-en="Dynamic programming language that runs in web browsers. Essential for modern web development"
+        >
+          Webブラウザで動作する動的なプログラミング言語。現代のWeb開発に不可欠
+        </p>
+      </div>
+
+      <div class="detail-section">
+        <h2 data-ja="基本情報" data-en="Basic Information">基本情報</h2>
+        <div class="info-grid">
+          <div class="info-item">
+            <div class="info-label" data-ja="開発者" data-en="Developer">
+              開発者
+            </div>
+            <div class="info-value">Brendan Eich</div>
+          </div>
+          <div class="info-item">
+            <div
+              class="info-label"
+              data-ja="初回リリース"
+              data-en="First Release"
+            >
+              初回リリース
+            </div>
+            <div class="info-value">1995年</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label" data-ja="パラダイム" data-en="Paradigm">
+              パラダイム
+            </div>
+            <div
+              class="info-value"
+              data-ja="オブジェクト指向、関数型、命令型"
+              data-en="Object-oriented, Functional, Imperative"
+            >
+              オブジェクト指向、関数型、命令型
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-label" data-ja="難易度" data-en="Difficulty">
+              難易度
+            </div>
+            <div class="info-value" data-ja="普通" data-en="Medium">普通</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <h2 data-ja="特徴" data-en="Features">特徴</h2>
+        <ul class="features-list">
+          <li
+            data-ja="ブラウザで直接実行可能"
+            data-en="Can be executed directly in browsers"
+          >
+            ブラウザで直接実行可能
+          </li>
+          <li data-ja="動的型付け" data-en="Dynamic typing">動的型付け</li>
+          <li
+            data-ja="プロトタイプベースのオブジェクト指向"
+            data-en="Prototype-based object-oriented"
+          >
+            プロトタイプベースのオブジェクト指向
+          </li>
+          <li
+            data-ja="非同期プログラミング（Promise、async/await）"
+            data-en="Asynchronous programming (Promise, async/await)"
+          >
+            非同期プログラミング（Promise、async/await）
+          </li>
+          <li
+            data-ja="豊富なライブラリとフレームワーク"
+            data-en="Rich libraries and frameworks"
+          >
+            豊富なライブラリとフレームワーク
+          </li>
+          <li
+            data-ja="Node.jsによるサーバーサイド開発"
+            data-en="Server-side development with Node.js"
+          >
+            Node.jsによるサーバーサイド開発
+          </li>
+          <li
+            data-ja="イベント駆動プログラミング"
+            data-en="Event-driven programming"
+          >
+            イベント駆動プログラミング
+          </li>
+        </ul>
+      </div>
+
+      <div class="detail-section">
+        <h2 data-ja="主な用途" data-en="Main Uses">主な用途</h2>
+        <div class="uses-grid">
+          <div
+            class="use-item"
+            data-ja="Webアプリケーション"
+            data-en="Web Applications"
+          >
+            Webアプリケーション
+          </div>
+          <div class="use-item" data-ja="モバイルアプリ" data-en="Mobile Apps">
+            モバイルアプリ
+          </div>
+          <div
+            class="use-item"
+            data-ja="デスクトップアプリ"
+            data-en="Desktop Apps"
+          >
+            デスクトップアプリ
+          </div>
+          <div class="use-item" data-ja="サーバーサイド" data-en="Server-side">
+            サーバーサイド
+          </div>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <h2 data-ja="サンプルコード" data-en="Sample Code">サンプルコード</h2>
+        <div class="code-block">
+          <pre>
+// Hello World
+console.log("Hello, World!");
+
+// 変数と関数
+const greeting = "こんにちは";
+let count = 0;
+
+function greet(name) {
+    return `${greeting}, ${name}さん！`;
+}
+
+console.log(greet("JavaScript"));
+
+// 配列とオブジェクト
+const languages = ["JavaScript", "Python", "Java"];
+const person = {
+    name: "田中",
+    age: 25,
+    skills: languages
+};
+
+// 配列の操作
+languages.forEach(lang => {
+    console.log(`言語: ${lang}`);
+});
+
+// 非同期処理
+async function fetchData() {
+    try {
+        const response = await fetch('https://api.example.com/data');
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('エラー:', error);
+    }
+}
+
+// DOM操作
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('ページが読み込まれました！');
+});
+
+// 色変更機能
+function changeColor() {
+    const color = "#" + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0');
+    const box = document.getElementById("colorBox");
+    if (box) {
+        box.style.background = color;
+        box.textContent = "背景色: " + color;
+    }
+}
+                </pre
+          >
+        </div>
+
+        <div class="interactive-demo">
+          <h3
+            style="color: #ffff00; margin-bottom: 1rem"
+            data-ja="インタラクティブデモ"
+            data-en="Interactive Demo"
+          >
+            インタラクティブデモ
+          </h3>
+          <button
+            class="demo-button"
+            onclick="showAlert()"
+            data-ja="アラート表示"
+            data-en="Show Alert"
+          >
+            アラート表示
+          </button>
+          <button
+            class="demo-button"
+            onclick="changeColor()"
+            data-ja="色を変更"
+            data-en="Change Color"
+          >
+            色を変更
+          </button>
+          <button
+            class="demo-button"
+            onclick="getCurrentTime()"
+            data-ja="現在時刻"
+            data-en="Current Time"
+          >
+            現在時刻
+          </button>
+          <div id="demo-output" style="margin-top: 1rem; color: #00cc33"></div>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <h2 data-ja="人気度" data-en="Popularity">人気度</h2>
+        <div class="info-grid">
+          <div class="info-item">
+            <div
+              class="info-label"
+              data-ja="国内人気度"
+              data-en="Domestic Popularity"
+            >
+              国内人気度
+            </div>
+            <div class="info-value">★★★★★</div>
+          </div>
+          <div class="info-item">
+            <div
+              class="info-label"
+              data-ja="世界人気度"
+              data-en="Global Popularity"
+            >
+              世界人気度
+            </div>
+            <div class="info-value">★★★★★</div>
+          </div>
+        </div>
+      </div>
+
+      <a
+        href="../index.html"
+        class="back-link"
+        data-ja="← 一覧に戻る"
+        data-en="← Back to List"
+        ><span data-lang-text>← 一覧に戻る</span></a
+      >
+    </main>
+
+    <!-- Enhanced Custom Cursor -->
+    <div id="cursor" class="cursor"></div>
+    <div id="cursor-trail" class="cursor-trail"></div>
+    <div id="cursor-glow" class="cursor-glow"></div>
+    <div id="cursor-particles" class="cursor-particles"></div>
+
+    <script>
+      // Interactive demo functions
+      function showAlert() {
+        const currentLang =
+          document.documentElement.getAttribute("data-lang") || "ja";
+        const message =
+          currentLang === "ja"
+            ? "JavaScriptが動作しています！"
+            : "JavaScript is working!";
+        alert(message);
+      }
+
+      function changeColor() {
+        const colors = ["#00ff41", "#ff0040", "#ffff00", "#00ffff", "#ff00ff"];
+        const randomColor = colors[Math.floor(Math.random() * colors.length)];
+        document.body.style.color = randomColor;
+        const currentLang =
+          document.documentElement.getAttribute("data-lang") || "ja";
+        const message =
+          currentLang === "ja"
+            ? `色を ${randomColor} に変更しました！`
+            : `Color changed to ${randomColor}!`;
+        document.getElementById("demo-output").textContent = message;
+      }
+
+      function getCurrentTime() {
+        const now = new Date();
+        const currentLang =
+          document.documentElement.getAttribute("data-lang") || "ja";
+        const timeString =
+          currentLang === "ja"
+            ? now.toLocaleString("ja-JP")
+            : now.toLocaleString("en-US");
+        const label = currentLang === "ja" ? "現在時刻: " : "Current time: ";
+        document.getElementById("demo-output").textContent = label + timeString;
+      }
+    </script>
+    <script src="../js/main.js"></script>
+    <script src="../js/language-details.js"></script>
+  </body>
+</html>

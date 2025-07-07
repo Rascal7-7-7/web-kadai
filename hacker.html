@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ハッカー体験 | プログラミング言語図鑑</title>
+    <meta
+      name="description"
+      content="本格的なハッカー体験ができるシミュレーター。ターミナル操作、システムハッキング、暗号解読など様々な体験が可能です。"
+    />
+    <link rel="icon" type="image/png" href="assets/icons/book.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Orbitron:wght@400;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/hacker.css" />
+  </head>
+  <body>
+    <!-- Matrix Background -->
+    <div id="matrix-bg" class="matrix-background"></div>
+
+    <!-- Scanlines Effect -->
+    <div class="scanlines"></div>
+
+    <!-- Warning Overlay -->
+    <div id="warning-overlay" class="warning-overlay">
+      <div class="warning-content">
+        <div class="warning-skull">💀</div>
+        <h2
+          data-ja="⚠️ 不正アクセス検出 ⚠️"
+          data-en="⚠️ UNAUTHORIZED ACCESS DETECTED ⚠️"
+        >
+          ⚠️ UNAUTHORIZED ACCESS DETECTED ⚠️
+        </h2>
+        <p
+          data-ja="このシステムは認可された職員のみ使用可能です。"
+          data-en="This system is for authorized personnel only."
+        >
+          This system is for authorized personnel only.
+        </p>
+        <p
+          data-ja="すべての活動は監視・記録されています。"
+          data-en="All activities are being monitored and logged."
+        >
+          All activities are being monitored and logged.
+        </p>
+        <button
+          id="proceed-btn"
+          class="proceed-btn"
+          data-ja="続行する"
+          data-en="PROCEED ANYWAY"
+        >
+          PROCEED ANYWAY
+        </button>
+      </div>
+    </div>
+
+    <!-- Header -->
+    <header class="hacker-header">
+      <div class="container">
+        <div class="header-content">
+          <div class="logo">
+            <div class="logo-icon">💀</div>
+            <div class="logo-text">
+              <h1 data-ja="ハッカーシミュレーター" data-en="HACKER SIMULATOR">
+                HACKER SIMULATOR
+              </h1>
+              <p
+                data-ja="不正アクセス検出"
+                data-en="Unauthorized Access Detected"
+              >
+                Unauthorized Access Detected
+              </p>
+            </div>
+          </div>
+
+          <div class="system-info">
+            <div class="info-item">
+              <span class="label" data-ja="IP:" data-en="IP:">IP:</span>
+              <span class="value" id="user-ip">192.168.1.100</span>
+            </div>
+            <div class="info-item">
+              <span class="label" data-ja="TIME:" data-en="TIME:">TIME:</span>
+              <span class="value" id="current-time"></span>
+            </div>
+            <div class="info-item">
+              <span class="label" data-ja="STATUS:" data-en="STATUS:"
+                >STATUS:</span
+              >
+              <span
+                class="value status-connected"
+                data-ja="接続済み"
+                data-en="CONNECTED"
+                >CONNECTED</span
+              >
+            </div>
+          </div>
+
+          <div class="header-controls">
+            <a
+              href="index.html"
+              class="nav-link"
+              onclick="window.location.href='index.html'; return false;"
+              data-ja="🏠 ホーム"
+              data-en="🏠 HOME"
+              >🏠 HOME</a
+            >
+            <button
+              id="lang-toggle"
+              class="lang-toggle"
+              data-ja="🌐 EN"
+              data-en="🌐 JA"
+            >
+              🌐 EN
+            </button>
+            <button id="hacker-menu-toggle" class="menu-toggle">☰</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Navigation Menu -->
+    <nav id="hacker-nav-menu" class="nav-menu">
+      <div class="nav-content">
+        <button id="hacker-nav-close" class="nav-close">✕</button>
+        <div class="nav-header">
+          <h2 data-ja="ハッカーメニュー" data-en="HACKER MENU">HACKER MENU</h2>
+        </div>
+        <ul class="nav-links">
+          <li>
+            <a
+              href="index.html"
+              class="nav-link"
+              onclick="window.location.href='index.html'; return false;"
+              data-ja="🏠 言語図鑑に戻る"
+              data-en="🏠 Back to Language Encyclopedia"
+              >🏠 言語図鑑に戻る</a
+            >
+          </li>
+          <li>
+            <a
+              href="#tools"
+              class="nav-link"
+              data-ja="🔧 ハッキングツール"
+              data-en="🔧 Hacking Tools"
+              >🔧 ハッキングツール</a
+            >
+          </li>
+          <li>
+            <a
+              href="#dashboard"
+              class="nav-link"
+              data-ja="📊 システム監視"
+              data-en="📊 System Monitor"
+              >📊 システム監視</a
+            >
+          </li>
+          <li>
+            <a
+              href="#achievements"
+              class="nav-link"
+              data-ja="🏆 実績"
+              data-en="🏆 Achievements"
+              >🏆 実績</a
+            >
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="hacker-main">
+      <div class="container">
+        <!-- Welcome Section -->
+        <section class="welcome-section">
+          <div
+            class="glitch-text"
+            id="glitch-welcome"
+            data-ja="闇の世界へようこそ"
+            data-en="WELCOME TO THE DARK SIDE"
+          >
+            WELCOME TO THE DARK SIDE
+          </div>
+          <p
+            class="subtitle"
+            data-ja="ハッキング体験を選択してください..."
+            data-en="Choose your hacking experience..."
+          >
+            Choose your hacking experience...
+          </p>
+          <div class="threat-level">
+            <span
+              class="threat-label"
+              data-ja="脅威レベル:"
+              data-en="THREAT LEVEL:"
+              >THREAT LEVEL:</span
+            >
+            <div class="threat-bar">
+              <div class="threat-fill" id="threat-fill"></div>
+            </div>
+            <span
+              class="threat-value"
+              id="threat-value"
+              data-ja="クリティカル"
+              data-en="CRITICAL"
+              >CRITICAL</span
+            >
+          </div>
+        </section>
+
+        <!-- Hacker Tools Grid -->
+        <section id="tools" class="tools-grid">
+          <!-- Advanced Terminal -->
+          <div class="tool-card" data-tool="terminal">
+            <div class="tool-icon">💻</div>
+            <h3 data-ja="高度なターミナル" data-en="Advanced Terminal">
+              Advanced Terminal
+            </h3>
+            <p
+              data-ja="本格的なLinuxターミナルでシステム侵入"
+              data-en="System intrusion with authentic Linux terminal"
+            >
+              本格的なLinuxターミナルでシステム侵入
+            </p>
+            <div class="tool-status" data-ja="準備完了" data-en="READY">
+              READY
+            </div>
+            <div class="tool-difficulty">★★★★☆</div>
+          </div>
+
+          <!-- Password Cracker Pro -->
+          <div class="tool-card" data-tool="password">
+            <div class="tool-icon">🔓</div>
+            <h3
+              data-ja="パスワードクラッカー Pro"
+              data-en="Password Cracker Pro"
+            >
+              Password Cracker Pro
+            </h3>
+            <p
+              data-ja="辞書攻撃・ブルートフォース・レインボーテーブル"
+              data-en="Dictionary attack, brute force, rainbow table"
+            >
+              辞書攻撃・ブルートフォース・レインボーテーブル
+            </p>
+            <div class="tool-status" data-ja="準備完了" data-en="READY">
+              READY
+            </div>
+            <div class="tool-difficulty">★★★☆☆</div>
+          </div>
+
+          <!-- Network Penetration -->
+          <div class="tool-card" data-tool="network">
+            <div class="tool-icon">🌐</div>
+            <h3 data-ja="ネットワーク侵入" data-en="Network Penetration">
+              Network Penetration
+            </h3>
+            <p
+              data-ja="ポートスキャン・脆弱性検出・侵入テスト"
+              data-en="Port scanning, vulnerability detection, penetration testing"
+            >
+              ポートスキャン・脆弱性検出・侵入テスト
+            </p>
+            <div class="tool-status" data-ja="準備完了" data-en="READY">
+              READY
+            </div>
+            <div class="tool-difficulty">★★★★★</div>
+          </div>
+
+          <!-- Crypto Warfare -->
+          <div class="tool-card" data-tool="crypto">
+            <div class="tool-icon">🔐</div>
+            <h3 data-ja="暗号戦争" data-en="Crypto Warfare">Crypto Warfare</h3>
+            <p
+              data-ja="暗号解読・ハッシュクラック・ステガノグラフィ"
+              data-en="Cryptography breaking, hash cracking, steganography"
+            >
+              暗号解読・ハッシュクラック・ステガノグラフィ
+            </p>
+            <div class="tool-status" data-ja="準備完了" data-en="READY">
+              READY
+            </div>
+            <div class="tool-difficulty">★★★★☆</div>
+          </div>
+
+          <!-- SQL Injection Lab -->
+          <div class="tool-card" data-tool="sql">
+            <div class="tool-icon">💉</div>
+            <h3 data-ja="SQLインジェクション ラボ" data-en="SQL Injection Lab">
+              SQL Injection Lab
+            </h3>
+            <p
+              data-ja="データベース侵入・権限昇格・データ抽出"
+              data-en="Database intrusion, privilege escalation, data extraction"
+            >
+              データベース侵入・権限昇格・データ抽出
+            </p>
+            <div class="tool-status" data-ja="準備完了" data-en="READY">
+              READY
+            </div>
+            <div class="tool-difficulty">★★★☆☆</div>
+          </div>
+
+          <!-- Social Engineering -->
+          <div class="tool-card" data-tool="social">
+            <div class="tool-icon">🎭</div>
+            <h3
+              data-ja="ソーシャルエンジニアリング"
+              data-en="Social Engineering"
+            >
+              Social Engineering
+            </h3>
+            <p
+              data-ja="フィッシング・プリテキスティング・心理操作"
+              data-en="Phishing, pretexting, psychological manipulation"
+            >
+              フィッシング・プリテキスティング・心理操作
+            </p>
+            <div class="tool-status" data-ja="準備完了" data-en="READY">
+              READY
+            </div>
+            <div class="tool-difficulty">★★☆☆☆</div>
+          </div>
+
+          <!-- Malware Lab -->
+          <div class="tool-card" data-tool="malware">
+            <div class="tool-icon">🦠</div>
+            <h3 data-ja="マルウェア ラボ" data-en="Malware Lab">Malware Lab</h3>
+            <p
+              data-ja="ウイルス作成・トロイの木馬・ランサムウェア"
+              data-en="Virus creation, trojan horses, ransomware"
+            >
+              ウイルス作成・トロイの木馬・ランサムウェア
+            </p>
+            <div class="tool-status" data-ja="準備完了" data-en="READY">
+              READY
+            </div>
+            <div class="tool-difficulty">★★★★★</div>
+          </div>
+
+          <!-- WiFi Hacking -->
+          <div class="tool-card" data-tool="wifi">
+            <div class="tool-icon">📡</div>
+            <h3 data-ja="WiFi ハッキング" data-en="WiFi Hacking">
+              WiFi Hacking
+            </h3>
+            <p
+              data-ja="WPA/WEP解析・Evil Twin・パケット傍受"
+              data-en="WPA/WEP analysis, Evil Twin, packet interception"
+            >
+              WPA/WEP解析・Evil Twin・パケット傍受
+            </p>
+            <div class="tool-status" data-ja="準備完了" data-en="READY">
+              READY
+            </div>
+            <div class="tool-difficulty">★★★★☆</div>
+          </div>
+
+          <!-- Digital Forensics -->
+          <div class="tool-card" data-tool="forensics">
+            <div class="tool-icon">🔍</div>
+            <h3 data-ja="デジタル フォレンジック" data-en="Digital Forensics">
+              Digital Forensics
+            </h3>
+            <p
+              data-ja="証拠隠滅・ログ改ざん・痕跡除去"
+              data-en="Evidence destruction, log tampering, trace removal"
+            >
+              証拠隠滅・ログ改ざん・痕跡除去
+            </p>
+            <div class="tool-status" data-ja="準備完了" data-en="READY">
+              READY
+            </div>
+            <div class="tool-difficulty">★★★★☆</div>
+          </div>
+        </section>
+
+        <!-- Tool Interface -->
+        <section id="tool-interface" class="tool-interface hidden">
+          <div class="interface-header">
+            <h2 id="interface-title">Tool Interface</h2>
+            <div class="interface-controls">
+              <button id="minimize-interface" class="control-btn">−</button>
+              <button id="maximize-interface" class="control-btn">□</button>
+              <button id="close-interface" class="control-btn">✕</button>
+            </div>
+          </div>
+          <div id="interface-content" class="interface-content">
+            <!-- Dynamic content will be loaded here -->
+          </div>
+        </section>
+
+        <!-- System Status Dashboard -->
+        <section id="dashboard" class="system-dashboard">
+          <h3>SYSTEM MONITORING</h3>
+          <div class="dashboard-grid">
+            <div class="status-panel">
+              <h4>System Resources</h4>
+              <div class="status-item">
+                <span class="status-label">CPU Usage</span>
+                <div class="status-bar">
+                  <div class="status-fill" style="width: 73%"></div>
+                </div>
+                <span class="status-value">73%</span>
+              </div>
+              <div class="status-item">
+                <span class="status-label">Memory</span>
+                <div class="status-bar">
+                  <div class="status-fill" style="width: 45%"></div>
+                </div>
+                <span class="status-value">45%</span>
+              </div>
+              <div class="status-item">
+                <span class="status-label">Network</span>
+                <div class="status-bar">
+                  <div class="status-fill" style="width: 89%"></div>
+                </div>
+                <span class="status-value">89%</span>
+              </div>
+            </div>
+
+            <div class="status-panel">
+              <h4>Active Connections</h4>
+              <div class="connection-list" id="connection-list">
+                <!-- Dynamic connections will be added here -->
+              </div>
+            </div>
+
+            <div class="status-panel">
+              <h4>Security Alerts</h4>
+              <div class="alert-list" id="alert-list">
+                <!-- Dynamic alerts will be added here -->
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Achievement System -->
+        <section id="achievements" class="achievements">
+          <h3>HACKER ACHIEVEMENTS</h3>
+          <div class="achievement-grid" id="achievement-grid">
+            <!-- Achievements will be dynamically added -->
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <!-- Help Button and Panel -->
+    <button id="help-toggle" class="help-toggle">❓</button>
+    <div id="help-panel" class="help-panel">
+      <h2
+        style="
+          color: #00ff41;
+          font-family: 'Orbitron', monospace;
+          margin-bottom: 1.5rem;
+          text-shadow: 0 0 10px #00ff41;
+        "
+      >
+        ハッカーシミュレーター ヘルプ
+      </h2>
+
+      <div style="margin-bottom: 2rem">
+        <h3 style="color: #ff0040; margin-bottom: 0.5rem">はじめに</h3>
+        <p style="color: #00cc33; margin-bottom: 1rem; line-height: 1.5">
+          このシミュレーターは教育目的で作られた仮想ハッキング体験環境です。実際のハッキング行為は違法であり、このツールはセキュリティ意識向上のためのものです。
+        </p>
+      </div>
+
+      <div style="margin-bottom: 2rem">
+        <h3 style="color: #ff0040; margin-bottom: 0.5rem">使い方</h3>
+        <ol style="color: #00cc33; margin-left: 1.5rem; line-height: 1.5">
+          <li>ツールカードをクリックして各ハッキングツールを起動</li>
+          <li>ツールインターフェース内の指示に従って操作</li>
+          <li>実績を解除してハッカーとしてのスキルを証明</li>
+        </ol>
+      </div>
+
+      <div style="margin-bottom: 2rem">
+        <h3 style="color: #ff0040; margin-bottom: 0.5rem">主要ツール解説</h3>
+        <ul style="color: #00cc33; margin-left: 1.5rem; line-height: 1.5">
+          <li>
+            <strong>Password Cracker Pro</strong>:
+            サンプルハッシュ「5f4dcc3b5aa765d61d8327deb882cf99」(MD5形式)を入力して解読を試みてください。これは「password」のハッシュ値です。
+          </li>
+          <li>
+            <strong>Crypto Warfare</strong>: 暗号化テキストのサンプル:
+            <ul style="margin-left: 1rem; margin-top: 0.5rem">
+              <li>Caesar: "Khoor Zruog" (シフト3)</li>
+              <li>Base64: "SGVsbG8gV29ybGQ="</li>
+              <li>ROT13: "Uryyb Jbeyq"</li>
+            </ul>
+          </li>
+          <li>
+            <strong>Network Penetration</strong>:
+            IPアドレスを入力してポートスキャンを実行
+          </li>
+        </ul>
+      </div>
+
+      <div style="margin-bottom: 2rem">
+        <h3 style="color: #ff0040; margin-bottom: 0.5rem">実績システム</h3>
+        <p style="color: #00cc33; margin-bottom: 1rem; line-height: 1.5">
+          各ツールを使用すると対応する実績が解除されます。すべての実績を解除してマスターハッカーになりましょう！
+        </p>
+      </div>
+
+      <div style="margin-bottom: 2rem">
+        <h3 style="color: #ff0040; margin-bottom: 0.5rem">注意事項</h3>
+        <p style="color: #00cc33; margin-bottom: 1rem; line-height: 1.5">
+          このシミュレーターで学んだ技術を実際のシステムに対して使用することは違法行為となる場合があります。教育目的でのみご利用ください。
+        </p>
+      </div>
+
+      <div>
+        <h3 style="color: #ff0040; margin-bottom: 0.5rem">言語切替</h3>
+        <p style="color: #00cc33; line-height: 1.5">
+          画面右上の「🌐 EN/JP」ボタンで言語を切り替えることができます。
+        </p>
+      </div>
+
+      <button
+        id="help-close"
+        style="
+          position: absolute;
+          top: 1rem;
+          right: 1rem;
+          background: rgba(255, 0, 0, 0.2);
+          border: 2px solid #ff0040;
+          color: #ff0040;
+          padding: 0.5rem;
+          font-size: 1.2rem;
+          transition: all 0.3s ease;
+        "
+      >
+        ✕
+      </button>
+    </div>
+
+    <!-- Enhanced Custom Cursor -->
+    <div id="cursor" class="cursor"></div>
+    <div id="cursor-trail" class="cursor-trail"></div>
+    <div id="cursor-glow" class="cursor-glow"></div>
+
+    <!-- Audio Elements -->
+    <audio id="typing-sound" preload="auto">
+      <source
+        src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZiTYIG2m98OScTgwOUarm7blmGgU7k9n1unEiBC13yO/eizEIHWq+8+OWT"
+        type="audio/wav"
+      />
+    </audio>
+
+    <script src="js/hacker.js"></script>
+  </body>
+</html>

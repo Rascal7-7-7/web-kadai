@@ -1,0 +1,601 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>COBOL | プログラミング言語図鑑</title>
+    <link rel="icon" type="image/png" href="../assets/icons/book.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/main.css" />
+    <style>
+      /* Detail page specific styles */
+      .detail-main {
+        padding-top: 120px;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding-left: 2rem;
+        padding-right: 2rem;
+      }
+
+      .detail-header {
+        text-align: center;
+        margin-bottom: 3rem;
+        padding: 2rem;
+        border: 2px solid #00ff41;
+        background: rgba(0, 255, 65, 0.05);
+        box-shadow: 0 0 30px rgba(0, 255, 65, 0.3);
+      }
+
+      .detail-logo {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+        text-shadow: 0 0 20px #00ff41;
+      }
+
+      .detail-title {
+        font-size: 3rem;
+        color: #00ff41;
+        text-shadow: 0 0 20px #00ff41;
+        margin-bottom: 0.5rem;
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      .detail-subtitle {
+        font-size: 1.2rem;
+        color: #00cc33;
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      .detail-section {
+        margin-bottom: 3rem;
+        padding: 2rem;
+        border: 2px solid #00ff41;
+        background: rgba(0, 0, 0, 0.8);
+        box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+      }
+
+      .detail-section h2 {
+        color: #00ff41;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        text-shadow: 0 0 10px #00ff41;
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      .detail-section h2::before {
+        content: "// ";
+        color: #00cc33;
+      }
+
+      .info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+
+      .info-item {
+        padding: 1rem;
+        border: 1px solid #00ff41;
+        background: rgba(0, 255, 65, 0.05);
+      }
+
+      .info-label {
+        color: #00cc33;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      .info-value {
+        color: #00ff41;
+        font-weight: 600;
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      .features-list {
+        list-style: none;
+      }
+
+      .features-list li {
+        padding: 0.5rem 0;
+        color: #00cc33;
+        border-bottom: 1px solid rgba(0, 255, 65, 0.2);
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      .features-list li::before {
+        content: "> ";
+        color: #00ff41;
+        font-weight: bold;
+      }
+
+      .code-block {
+        background: rgba(0, 0, 0, 0.9);
+        border: 2px solid #00ff41;
+        padding: 1.5rem;
+        margin: 1rem 0;
+        overflow-x: auto;
+        box-shadow: inset 0 0 20px rgba(0, 255, 65, 0.1);
+      }
+
+      .code-block pre {
+        color: #00ff41;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.9rem;
+      }
+
+      .uses-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+      }
+
+      .use-item {
+        padding: 1rem;
+        border: 1px solid #00ff41;
+        background: rgba(0, 255, 65, 0.05);
+        text-align: center;
+        color: #00cc33;
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      .back-link {
+        display: inline-block;
+        padding: 1rem 2rem;
+        background: rgba(0, 255, 65, 0.1);
+        border: 2px solid #00ff41;
+        color: #00ff41;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      .back-link:hover {
+        background: rgba(0, 255, 65, 0.2);
+        box-shadow: 0 0 25px rgba(0, 255, 65, 0.5);
+        transform: scale(1.05);
+      }
+
+      @media (max-width: 768px) {
+        .detail-main {
+          padding-left: 1rem;
+          padding-right: 1rem;
+        }
+
+        .detail-title {
+          font-size: 2rem;
+        }
+
+        .detail-section {
+          padding: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="container">
+        <div class="header-content">
+          <div class="logo">
+            <div class="logo-icon">💻</div>
+            <div class="logo-text">
+              <h1
+                data-ja="プログラミング言語図鑑"
+                data-en="Programming Language Encyclopedia"
+              >
+                プログラミング言語図鑑
+              </h1>
+              <p
+                data-ja="プログラミング言語図鑑"
+                data-en="Programming Language Encyclopedia"
+              >
+                Programming Language Encyclopedia
+              </p>
+            </div>
+          </div>
+
+          <div class="search-container">
+            <input
+              type="text"
+              id="search-input"
+              placeholder="言語を検索..."
+              class="search-input"
+              data-ja="言語を検索..."
+              data-en="Search languages..."
+            />
+            <div class="search-icon">🔍</div>
+          </div>
+
+          <div class="header-controls">
+            <!-- Hacker Experience Button with Effects -->
+            <a href="../hacker.html" id="hacker-btn" class="hacker-btn">
+              <span class="hacker-icon">💀</span>
+              <span
+                class="hacker-text"
+                data-ja="ハッカー体験"
+                data-en="Hacker Experience"
+                >HACK</span
+              >
+              <div class="hacker-particles"></div>
+            </a>
+            <button
+              id="lang-toggle"
+              class="lang-toggle"
+              data-ja="🌐 EN"
+              data-en="🌐 JA"
+            >
+              🌐 EN
+            </button>
+            <button id="menu-toggle" class="menu-toggle">☰</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Navigation Menu -->
+    <nav id="nav-menu" class="nav-menu">
+      <div class="nav-content">
+        <button id="nav-close" class="nav-close">✕</button>
+        <div class="nav-header">
+          <h2 data-ja="メニュー" data-en="Menu">メニュー</h2>
+        </div>
+        <ul class="nav-links">
+          <li>
+            <a
+              href="../index.html#home"
+              class="nav-link"
+              data-ja="🏠 ホーム"
+              data-en="🏠 Home"
+              >🏠 ホーム</a
+            >
+          </li>
+          <li>
+            <a
+              href="../index.html#categories"
+              class="nav-link"
+              data-ja="📂 カテゴリ"
+              data-en="📂 Categories"
+              >📂 カテゴリ</a
+            >
+          </li>
+          <li>
+            <a
+              href="../hacker.html"
+              class="nav-link"
+              data-ja="💀 ハッカー体験"
+              data-en="💀 Hacker Experience"
+              >💀 ハッカー体験</a
+            >
+          </li>
+          <li>
+            <a
+              href="../index.html#about"
+              class="nav-link"
+              data-ja="ℹ️ このサイトについて"
+              data-en="ℹ️ About this site"
+              >ℹ️ このサイトについて</a
+            >
+          </li>
+        </ul>
+
+        <div class="nav-categories">
+          <h3 data-ja="カテゴリ別に探索" data-en="Explore by Category">
+            カテゴリ別に探索
+          </h3>
+          <ul class="category-links">
+            <li>
+              <a
+                href="../index.html#app-development"
+                class="category-link"
+                data-category="app-development"
+                data-ja="📱 アプリ開発"
+                data-en="📱 App Development"
+                >📱 アプリ開発</a
+              >
+            </li>
+            <li>
+              <a
+                href="../index.html#server-side"
+                class="category-link"
+                data-category="server-side"
+                data-ja="🖥️ サーバーサイド"
+                data-en="🖥️ Server-side"
+                >🖥️ サーバーサイド</a
+              >
+            </li>
+            <li>
+              <a
+                href="../index.html#web-development"
+                class="category-link"
+                data-category="web-development"
+                data-ja="🌐 Web開発"
+                data-en="🌐 Web Development"
+                >🌐 Web開発</a
+              >
+            </li>
+            <li>
+              <a
+                href="../index.html#system"
+                class="category-link"
+                data-category="system"
+                data-ja="⚙️ システム"
+                data-en="⚙️ System"
+                >⚙️ システム</a
+              >
+            </li>
+            <li>
+              <a
+                href="../index.html#database"
+                class="category-link"
+                data-category="database"
+                data-ja="🗃️ データベース"
+                data-en="🗃️ Database"
+                >🗃️ データベース</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="detail-main">
+      <div class="detail-header">
+        <div class="detail-logo">
+          <img
+            src="../assets/logos/cobol.png"
+            alt="COBOL"
+            style="width: 80px; height: 80px; object-fit: contain"
+          />
+        </div>
+        <h1 class="detail-title">COBOL</h1>
+        <p
+          class="detail-subtitle"
+          data-ja="ビジネス用途に特化した古典的なプログラミング言語。金融システムで現在も使用"
+          data-en="A classic programming language specialized for business use. Still used in financial systems."
+        >
+          ビジネス用途に特化した古典的なプログラミング言語。金融システムで現在も使用
+        </p>
+      </div>
+
+      <div class="detail-section">
+        <h2 data-ja="基本情報" data-en="Basic Information">基本情報</h2>
+        <div class="info-grid">
+          <div class="info-item">
+            <div class="info-label" data-ja="開発者" data-en="Developer">
+              開発者
+            </div>
+            <div class="info-value">CODASYL</div>
+          </div>
+          <div class="info-item">
+            <div
+              class="info-label"
+              data-ja="初回リリース"
+              data-en="First Release"
+            >
+              初回リリース
+            </div>
+            <div class="info-value">1959年</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label" data-ja="パラダイム" data-en="Paradigm">
+              パラダイム
+            </div>
+            <div
+              class="info-value"
+              data-ja="手続き型、構造化"
+              data-en="Procedural, Structured"
+            >
+              手続き型、構造化
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-label" data-ja="難易度" data-en="Difficulty">
+              難易度
+            </div>
+            <div class="info-value" data-ja="普通" data-en="Medium">普通</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <h2 data-ja="特徴" data-en="Features">特徴</h2>
+        <ul class="features-list">
+          <li
+            data-ja="ビジネス処理に特化した設計"
+            data-en="Designed specifically for business processing"
+          >
+            ビジネス処理に特化した設計
+          </li>
+          <li
+            data-ja="英語に近い読みやすい構文"
+            data-en="Readable syntax close to English"
+          >
+            英語に近い読みやすい構文
+          </li>
+          <li data-ja="高い後方互換性" data-en="High backward compatibility">
+            高い後方互換性
+          </li>
+          <li
+            data-ja="大量データ処理に強い"
+            data-en="Strong in large data processing"
+          >
+            大量データ処理に強い
+          </li>
+          <li data-ja="堅牢性と信頼性" data-en="Robustness and reliability">
+            堅牢性と信頼性
+          </li>
+          <li data-ja="バッチ処理に最適" data-en="Optimal for batch processing">
+            バッチ処理に最適
+          </li>
+          <li
+            data-ja="レガシーシステムとの統合"
+            data-en="Integration with legacy systems"
+          >
+            レガシーシステムとの統合
+          </li>
+        </ul>
+      </div>
+
+      <div class="detail-section">
+        <h2 data-ja="主な用途" data-en="Main Uses">主な用途</h2>
+        <div class="uses-grid">
+          <div
+            class="use-item"
+            data-ja="金融システム"
+            data-en="Financial Systems"
+          >
+            金融システム
+          </div>
+          <div class="use-item" data-ja="基幹システム" data-en="Core Systems">
+            基幹システム
+          </div>
+          <div
+            class="use-item"
+            data-ja="政府システム"
+            data-en="Government Systems"
+          >
+            政府システム
+          </div>
+          <div
+            class="use-item"
+            data-ja="レガシーシステム"
+            data-en="Legacy Systems"
+          >
+            レガシーシステム
+          </div>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <h2 data-ja="サンプルコード" data-en="Sample Code">サンプルコード</h2>
+        <div class="code-block">
+          <pre>
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. HELLO-WORLD.
+       
+       ENVIRONMENT DIVISION.
+       CONFIGURATION SECTION.
+       
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+       01 GREETING        PIC X(20) VALUE "HELLO, WORLD!".
+       01 CURRENT-DATE-DATA.
+          05 CURRENT-DATE.
+             10 CURRENT-YEAR   PIC 9(4).
+             10 CURRENT-MONTH  PIC 9(2).
+             10 CURRENT-DAY    PIC 9(2).
+          05 CURRENT-TIME.
+             10 CURRENT-HOUR   PIC 9(2).
+             10 CURRENT-MINUTE PIC 9(2).
+             10 CURRENT-SECOND PIC 9(2).
+             10 CURRENT-MS     PIC 9(2).
+       
+       01 EMPLOYEE-RECORD.
+          05 EMPLOYEE-ID       PIC 9(5).
+          05 EMPLOYEE-NAME     PIC X(30).
+          05 EMPLOYEE-DEPT     PIC X(20).
+          05 EMPLOYEE-SALARY   PIC 9(7)V99.
+       
+       01 COUNTER             PIC 9(3) VALUE 0.
+       01 TOTAL-SALARY        PIC 9(9)V99 VALUE 0.
+       01 AVERAGE-SALARY      PIC 9(7)V99.
+       
+       PROCEDURE DIVISION.
+       MAIN-PROCEDURE.
+           DISPLAY GREETING.
+           
+           MOVE FUNCTION CURRENT-DATE TO CURRENT-DATE-DATA.
+           DISPLAY "現在日時: " CURRENT-YEAR "/" CURRENT-MONTH "/"
+                  CURRENT-DAY " " CURRENT-HOUR ":" CURRENT-MINUTE.
+           
+           PERFORM INITIALIZE-EMPLOYEE.
+           PERFORM DISPLAY-EMPLOYEE.
+           
+           PERFORM PROCESS-EMPLOYEES.
+           
+           DISPLAY "処理完了".
+           STOP RUN.
+       
+       INITIALIZE-EMPLOYEE.
+           MOVE 12345 TO EMPLOYEE-ID.
+           MOVE "山田太郎" TO EMPLOYEE-NAME.
+           MOVE "開発部" TO EMPLOYEE-DEPT.
+           MOVE 450000.00 TO EMPLOYEE-SALARY.
+       
+       DISPLAY-EMPLOYEE.
+           DISPLAY "社員情報:".
+           DISPLAY "  ID: " EMPLOYEE-ID.
+           DISPLAY "  名前: " EMPLOYEE-NAME.
+           DISPLAY "  部署: " EMPLOYEE-DEPT.
+           DISPLAY "  給与: " EMPLOYEE-SALARY.
+       
+       PROCESS-EMPLOYEES.
+           PERFORM VARYING COUNTER FROM 1 BY 1 UNTIL COUNTER > 5
+              DISPLAY "処理中: " COUNTER
+              ADD EMPLOYEE-SALARY TO TOTAL-SALARY
+           END-PERFORM.
+           
+           COMPUTE AVERAGE-SALARY = TOTAL-SALARY / 5.
+           DISPLAY "合計給与: " TOTAL-SALARY.
+           DISPLAY "平均給与: " AVERAGE-SALARY.
+           
+           EVALUATE AVERAGE-SALARY
+              WHEN 0 THRU 300000.00
+                 DISPLAY "給与レベル: 低"
+              WHEN 300000.01 THRU 600000.00
+                 DISPLAY "給与レベル: 中"
+              WHEN OTHER
+                 DISPLAY "給与レベル: 高"
+           END-EVALUATE.
+                </pre
+          >
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <h2 data-ja="人気度" data-en="Popularity">人気度</h2>
+        <div class="info-grid">
+          <div class="info-item">
+            <div
+              class="info-label"
+              data-ja="国内人気度"
+              data-en="Domestic Popularity"
+            >
+              国内人気度
+            </div>
+            <div class="info-value">★★☆☆☆</div>
+          </div>
+          <div class="info-item">
+            <div
+              class="info-label"
+              data-ja="世界人気度"
+              data-en="Global Popularity"
+            >
+              世界人気度
+            </div>
+            <div class="info-value">★★☆☆☆</div>
+          </div>
+        </div>
+      </div>
+
+      <a href="../index.html" class="back-link">← 一覧に戻る</a>
+    </main>
+
+    <!-- Enhanced Custom Cursor -->
+    <div id="cursor" class="cursor"></div>
+    <div id="cursor-trail" class="cursor-trail"></div>
+    <div id="cursor-glow" class="cursor-glow"></div>
+    <div id="cursor-particles" class="cursor-particles"></div>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/language-details.js"></script>
+  </body>
+</html>

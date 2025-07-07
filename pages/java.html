@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Java | プログラミング言語図鑑</title>
+    <link rel="icon" type="image/png" href="../assets/icons/book.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/main.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="container">
+        <div class="header-content">
+          <div class="logo">
+            <div class="logo-icon">💻</div>
+            <div class="logo-text">
+              <h1>プログラミング言語図鑑</h1>
+              <p>Programming Language Encyclopedia</p>
+            </div>
+          </div>
+
+          <div class="search-container">
+            <input
+              type="text"
+              id="search-input"
+              placeholder="言語を検索..."
+              class="search-input"
+            />
+            <div class="search-icon">🔍</div>
+          </div>
+
+          <div class="header-controls">
+            <!-- Hacker Experience Button with Effects -->
+            <a href="../hacker.html" id="hacker-btn" class="hacker-btn">
+              <span class="hacker-icon">💀</span>
+              <span class="hacker-text">HACK</span>
+              <div class="hacker-particles"></div>
+            </a>
+            <button
+              id="lang-toggle"
+              class="lang-toggle"
+              data-ja="🌐 EN"
+              data-en="🌐 JA"
+            >
+              🌐 EN
+            </button>
+            <button id="menu-toggle" class="menu-toggle">☰</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Navigation Menu -->
+    <nav id="nav-menu" class="nav-menu">
+      <div class="nav-content">
+        <button id="nav-close" class="nav-close">✕</button>
+        <div class="nav-header">
+          <h2 data-ja="メニュー" data-en="Menu">メニュー</h2>
+        </div>
+        <ul class="nav-links">
+          <li>
+            <a
+              href="../index.html#home"
+              class="nav-link"
+              data-ja="🏠 ホーム"
+              data-en="🏠 Home"
+              >🏠 ホーム</a
+            >
+          </li>
+          <li>
+            <a
+              href="../index.html#categories"
+              class="nav-link"
+              data-ja="📂 カテゴリ"
+              data-en="📂 Categories"
+              >📂 カテゴリ</a
+            >
+          </li>
+          <li>
+            <a
+              href="../hacker.html"
+              class="nav-link"
+              data-ja="💀 ハッカー体験"
+              data-en="💀 Hacker Experience"
+              >💀 ハッカー体験</a
+            >
+          </li>
+          <li>
+            <a
+              href="../index.html#about"
+              class="nav-link"
+              data-ja="ℹ️ このサイトについて"
+              data-en="ℹ️ About this site"
+              >ℹ️ このサイトについて</a
+            >
+          </li>
+        </ul>
+
+        <div class="nav-categories">
+          <h3 data-ja="カテゴリ別に探索" data-en="Explore by Category">
+            カテゴリ別に探索
+          </h3>
+          <ul class="category-links">
+            <li>
+              <a
+                href="../index.html#app-development"
+                class="category-link"
+                data-category="app-development"
+                >📱 アプリ開発</a
+              >
+            </li>
+            <li>
+              <a
+                href="../index.html#server-side"
+                class="category-link"
+                data-category="server-side"
+                >🖥️ サーバーサイド</a
+              >
+            </li>
+            <li>
+              <a
+                href="../index.html#web-development"
+                class="category-link"
+                data-category="web-development"
+                >🌐 Web開発</a
+              >
+            </li>
+            <li>
+              <a
+                href="../index.html#system"
+                class="category-link"
+                data-category="system"
+                >⚙️ システム</a
+              >
+            </li>
+            <li>
+              <a
+                href="../index.html#database"
+                class="category-link"
+                data-category="database"
+                >🗃️ データベース</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="detail-main">
+      <div class="detail-header">
+        <div class="detail-logo">
+          <img
+            src="../assets/logos/Java.png"
+            alt="Java"
+            style="width: 80px; height: 80px; object-fit: contain"
+          />
+        </div>
+        <h1 class="detail-title" data-ja="Java" data-en="Java">Java</h1>
+        <p
+          class="detail-subtitle"
+          data-ja="企業システムからモバイルアプリまで幅広く使用される、オブジェクト指向プログラミング言語"
+          data-en="An object-oriented programming language widely used from enterprise systems to mobile apps"
+        >
+          企業システムからモバイルアプリまで幅広く使用される、オブジェクト指向プログラミング言語
+        </p>
+      </div>
+
+      <div class="detail-section">
+        <h2 data-ja="基本情報" data-en="Basic Information">基本情報</h2>
+        <div class="info-grid">
+          <div class="info-item">
+            <div class="info-label" data-ja="開発者" data-en="Developer">
+              開発者
+            </div>
+            <div class="info-value">Sun Microsystems</div>
+          </div>
+          <div class="info-item">
+            <div
+              class="info-label"
+              data-ja="初回リリース"
+              data-en="Initial Release"
+            >
+              初回リリース
+            </div>
+            <div class="info-value">1995年</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label" data-ja="パラダイム" data-en="Paradigm">
+              パラダイム
+            </div>
+            <div
+              class="info-value"
+              data-ja="オブジェクト指向、命令型、ジェネリック"
+              data-en="Object-oriented, Imperative, Generic"
+            >
+              オブジェクト指向、命令型、ジェネリック
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-label" data-ja="難易度" data-en="Difficulty">
+              難易度
+            </div>
+            <div class="info-value" data-ja="普通" data-en="Medium">普通</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <h2 data-ja="特徴" data-en="Features">特徴</h2>
+        <ul class="features-list">
+          <li
+            data-ja="「Write Once, Run Anywhere」- 一度書けばどこでも実行可能"
+            data-en="'Write Once, Run Anywhere' - Code once, run anywhere"
+          >
+            「Write Once, Run Anywhere」- 一度書けばどこでも実行可能
+          </li>
+          <li
+            data-ja="強力なオブジェクト指向プログラミング機能"
+            data-en="Powerful object-oriented programming features"
+          >
+            強力なオブジェクト指向プログラミング機能
+          </li>
+          <li
+            data-ja="自動メモリ管理（ガベージコレクション）"
+            data-en="Automatic memory management (garbage collection)"
+          >
+            自動メモリ管理（ガベージコレクション）
+          </li>
+          <li
+            data-ja="豊富なライブラリとフレームワーク"
+            data-en="Rich libraries and frameworks"
+          >
+            豊富なライブラリとフレームワーク
+          </li>
+          <li
+            data-ja="マルチスレッド処理のサポート"
+            data-en="Multithreading support"
+          >
+            マルチスレッド処理のサポート
+          </li>
+          <li
+            data-ja="セキュリティ機能が充実"
+            data-en="Comprehensive security features"
+          >
+            セキュリティ機能が充実
+          </li>
+          <li
+            data-ja="大規模なコミュニティとエコシステム"
+            data-en="Large community and ecosystem"
+          >
+            大規模なコミュニティとエコシステム
+          </li>
+        </ul>
+      </div>
+
+      <div class="detail-section">
+        <h2 data-ja="主な用途" data-en="Main Uses">主な用途</h2>
+        <div class="uses-grid">
+          <div class="use-item" data-ja="Androidアプリ" data-en="Android Apps">
+            Androidアプリ
+          </div>
+          <div
+            class="use-item"
+            data-ja="Webアプリケーション"
+            data-en="Web Applications"
+          >
+            Webアプリケーション
+          </div>
+          <div
+            class="use-item"
+            data-ja="企業システム"
+            data-en="Enterprise Systems"
+          >
+            企業システム
+          </div>
+          <div
+            class="use-item"
+            data-ja="デスクトップアプリ"
+            data-en="Desktop Apps"
+          >
+            デスクトップアプリ
+          </div>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <h2 data-ja="サンプルコード" data-en="Sample Code">サンプルコード</h2>
+        <div class="code-block">
+          <pre>
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("Hello, World!");
+        
+        // 変数の宣言と使用
+        String message = "Javaプログラミング";
+        int number = 42;
+        
+        System.out.println(message + " - " + number);
+        
+        // 配列の使用
+        int[] numbers = {1, 2, 3, 4, 5};
+        for (int num : numbers) {
+            System.out.println("Number: " + num);
+        }
+    }
+}
+                </pre
+          >
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <h2 data-ja="人気度" data-en="Popularity">人気度</h2>
+        <div class="info-grid">
+          <div class="info-item">
+            <div
+              class="info-label"
+              data-ja="国内人気度"
+              data-en="Domestic Popularity"
+            >
+              国内人気度
+            </div>
+            <div class="info-value">★★★★★</div>
+          </div>
+          <div class="info-item">
+            <div
+              class="info-label"
+              data-ja="世界人気度"
+              data-en="Global Popularity"
+            >
+              世界人気度
+            </div>
+            <div class="info-value">★★★★★</div>
+          </div>
+        </div>
+      </div>
+
+      <a
+        href="../index.html"
+        class="back-link"
+        data-ja="← 一覧に戻る"
+        data-en="← Back to List"
+        ><span data-ja="← 一覧に戻る" data-en="← Back to List"
+          >← 一覧に戻る</span
+        ></a
+      >
+    </main>
+
+    <!-- Enhanced Custom Cursor -->
+    <div id="cursor" class="cursor"></div>
+    <div id="cursor-trail" class="cursor-trail"></div>
+    <div id="cursor-glow" class="cursor-glow"></div>
+    <div id="cursor-particles" class="cursor-particles"></div>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/language-details.js"></script>
+  </body>
+</html>

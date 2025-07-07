@@ -1,0 +1,379 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C | プログラミング言語図鑑</title>
+    <link rel="icon" type="image/png" href="../assets/icons/book.png">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/main.css">
+    <style>
+        /* Detail page specific styles */
+        .detail-main {
+            padding-top: 120px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-left: 2rem;
+            padding-right: 2rem;
+        }
+
+        .detail-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            border: 2px solid #00ff41;
+            background: rgba(0, 255, 65, 0.05);
+            box-shadow: 0 0 30px rgba(0, 255, 65, 0.3);
+        }
+
+        .detail-logo {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 20px #00ff41;
+        }
+
+        .detail-title {
+            font-size: 3rem;
+            color: #00ff41;
+            text-shadow: 0 0 20px #00ff41;
+            margin-bottom: 0.5rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .detail-subtitle {
+            font-size: 1.2rem;
+            color: #00cc33;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .detail-section {
+            margin-bottom: 3rem;
+            padding: 2rem;
+            border: 2px solid #00ff41;
+            background: rgba(0, 0, 0, 0.8);
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+        }
+
+        .detail-section h2 {
+            color: #00ff41;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 10px #00ff41;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .detail-section h2::before {
+            content: '// ';
+            color: #00cc33;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .info-item {
+            padding: 1rem;
+            border: 1px solid #00ff41;
+            background: rgba(0, 255, 65, 0.05);
+        }
+
+        .info-label {
+            color: #00cc33;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .info-value {
+            color: #00ff41;
+            font-weight: 600;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .features-list {
+            list-style: none;
+        }
+
+        .features-list li {
+            padding: 0.5rem 0;
+            color: #00cc33;
+            border-bottom: 1px solid rgba(0, 255, 65, 0.2);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .features-list li::before {
+            content: '> ';
+            color: #00ff41;
+            font-weight: bold;
+        }
+
+        .code-block {
+            background: rgba(0, 0, 0, 0.9);
+            border: 2px solid #00ff41;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+            box-shadow: inset 0 0 20px rgba(0, 255, 65, 0.1);
+        }
+
+        .code-block pre {
+            color: #00ff41;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+        }
+
+        .uses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .use-item {
+            padding: 1rem;
+            border: 1px solid #00ff41;
+            background: rgba(0, 255, 65, 0.05);
+            text-align: center;
+            color: #00cc33;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .back-link {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: rgba(0, 255, 65, 0.1);
+            border: 2px solid #00ff41;
+            color: #00ff41;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .back-link:hover {
+            background: rgba(0, 255, 65, 0.2);
+            box-shadow: 0 0 25px rgba(0, 255, 65, 0.5);
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .detail-main {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            
+            .detail-title {
+                font-size: 2rem;
+            }
+            
+            .detail-section {
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">💻</div>                <div class="logo-text">
+                    <h1 data-ja="プログラミング言語図鑑" data-en="Programming Language Encyclopedia">プログラミング言語図鑑</h1>
+                    <p data-ja="プログラミング言語図鑑" data-en="Programming Language Encyclopedia">Programming Language Encyclopedia</p>
+                </div>
+                </div>
+                
+                <div class="search-container">
+                    <input type="text" id="search-input" placeholder="言語を検索..." class="search-input">
+                    <div class="search-icon">🔍</div>
+                </div>
+                
+                <div class="header-controls">
+                    <!-- Hacker Experience Button with Effects -->
+                    <a href="../hacker.html" id="hacker-btn" class="hacker-btn">
+                        <span class="hacker-icon">💀</span>
+                        <span class="hacker-text">HACK</span>
+                        <div class="hacker-particles"></div>
+                    </a>
+                    <button id="lang-toggle" class="lang-toggle" data-ja="🌐 EN" data-en="🌐 JA">🌐 EN</button>
+                    <button id="menu-toggle" class="menu-toggle">☰</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Menu -->
+    <nav id="nav-menu" class="nav-menu">
+        <div class="nav-content">
+            <button id="nav-close" class="nav-close">✕</button>
+            <div class="nav-header">
+                <h2>メニュー</h2>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../index.html#home" class="nav-link">🏠 ホーム</a></li>
+                <li><a href="../index.html#categories" class="nav-link">📂 カテゴリ</a></li>
+                <li><a href="../hacker.html" class="nav-link">💀 ハッカー体験</a></li>
+                <li><a href="../index.html#about" class="nav-link">ℹ️ このサイトについて</a></li>
+            </ul>
+            
+            <div class="nav-categories">
+                <h3>カテゴリ別に探索</h3>
+                <ul class="category-links">
+                    <li><a href="../index.html#app-development" class="category-link" data-category="app-development">📱 アプリ開発</a></li>
+                    <li><a href="../index.html#server-side" class="category-link" data-category="server-side">🖥️ サーバーサイド</a></li>
+                    <li><a href="../index.html#web-development" class="category-link" data-category="web-development">🌐 Web開発</a></li>
+                    <li><a href="../index.html#system" class="category-link" data-category="system">⚙️ システム</a></li>
+                    <li><a href="../index.html#database" class="category-link" data-category="database">🗃️ データベース</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="detail-main">
+        <div class="detail-header">
+            <div class="detail-logo">
+                <img src="../assets/logos/C.png" alt="C" style="width: 80px; height: 80px; object-fit: contain;" />
+            </div>
+            <h1 class="detail-title" data-ja="C" data-en="C">C</h1>
+            <p class="detail-subtitle" data-ja="システムプログラミングの基盤となる低レベルプログラミング言語" data-en="Low-level programming language that forms the foundation of system programming">システムプログラミングの基盤となる低レベルプログラミング言語</p>
+        </div>
+        
+        <div class="detail-section">
+            <h2 data-ja="基本情報" data-en="Basic Information">基本情報</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label" data-ja="開発者" data-en="Developer">開発者</div>
+                    <div class="info-value">Dennis Ritchie</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label" data-ja="初回リリース" data-en="First Release">初回リリース</div>
+                    <div class="info-value">1972年</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label" data-ja="パラダイム" data-en="Paradigm">パラダイム</div>
+                    <div class="info-value" data-ja="手続き型、構造化" data-en="Procedural, Structured">手続き型、構造化</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label" data-ja="難易度" data-en="Difficulty">難易度</div>
+                    <div class="info-value" data-ja="難しい" data-en="Hard">難しい</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="detail-section">
+            <h2 data-ja="特徴" data-en="Features">特徴</h2>
+            <ul class="features-list">
+                <li data-ja="低レベルメモリ操作" data-en="Low-level memory manipulation">低レベルメモリ操作</li>
+                <li data-ja="高速な実行速度" data-en="Fast execution speed">高速な実行速度</li>
+                <li data-ja="ポータブルなコード" data-en="Portable code">ポータブルなコード</li>
+                <li data-ja="シンプルな構文" data-en="Simple syntax">シンプルな構文</li>
+                <li data-ja="豊富なライブラリ" data-en="Rich libraries">豊富なライブラリ</li>
+                <li data-ja="ハードウェア制御" data-en="Hardware control">ハードウェア制御</li>
+                <li data-ja="効率的なメモリ使用" data-en="Efficient memory usage">効率的なメモリ使用</li>
+            </ul>
+        </div>
+        
+        <div class="detail-section">
+            <h2 data-ja="主な用途" data-en="Main Uses">主な用途</h2>
+            <div class="uses-grid">
+                <div class="use-item" data-ja="OS開発" data-en="OS Development">OS開発</div>
+                <div class="use-item" data-ja="組み込みシステム" data-en="Embedded Systems">組み込みシステム</div>
+                <div class="use-item" data-ja="ドライバ" data-en="Drivers">ドライバ</div>
+                <div class="use-item" data-ja="ゲームエンジン" data-en="Game Engines">ゲームエンジン</div>
+            </div>
+        </div>
+        
+        <div class="detail-section">
+            <h2 data-ja="サンプルコード" data-en="Sample Code">サンプルコード</h2>
+            <div class="code-block">
+                <pre>
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+
+// Hello World
+int main() {
+    printf("Hello, World!\n");
+    
+    // 変数の宣言と使用
+    int number = 42;
+    char message[] = "C言語";
+    float pi = 3.14159;
+    
+    printf("%s - %d - %.2f\n", message, number, pi);
+    
+    // 配列の使用
+    int numbers[] = {1, 2, 3, 4, 5};
+    int size = sizeof(numbers) / sizeof(numbers[0]);
+    
+    for (int i = 0; i < size; i++) {
+        printf("Number[%d]: %d\n", i, numbers[i]);
+    }
+    
+    // 関数の呼び出し
+    int result = add(10, 20);
+    printf("10 + 20 = %d\n", result);
+    
+    // ポインタの使用
+    int value = 100;
+    int *ptr = &value;
+    printf("Value: %d, Address: %p\n", *ptr, ptr);
+    
+    // 動的メモリ割り当て
+    int *dynamic_array = malloc(5 * sizeof(int));
+    if (dynamic_array != NULL) {
+        for (int i = 0; i < 5; i++) {
+            dynamic_array[i] = i * 10;
+            printf("Dynamic[%d]: %d\n", i, dynamic_array[i]);
+        }
+        free(dynamic_array);
+    }
+    
+    return 0;
+}
+
+// 関数の定義
+int add(int a, int b) {
+    return a + b;
+}
+                </pre>
+            </div>
+        </div>
+        
+        <div class="detail-section">
+            <h2 data-ja="人気度" data-en="Popularity">人気度</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-label" data-ja="国内人気度" data-en="Domestic Popularity">国内人気度</div>
+                    <div class="info-value">★★★★☆</div>
+                </div>
+                <div class="info-item">
+                    <div class="info-label" data-ja="世界人気度" data-en="Global Popularity">世界人気度</div>
+                    <div class="info-value">★★★★☆</div>
+                </div>
+            </div>
+        </div>
+        
+        <a href="../index.html" class="back-link"><span data-ja="← 一覧に戻る" data-en="← Back to List">← 一覧に戻る</span></a>
+    </main>
+
+    <!-- Enhanced Custom Cursor -->
+    <div id="cursor" class="cursor"></div>
+    <div id="cursor-trail" class="cursor-trail"></div>
+    <div id="cursor-glow" class="cursor-glow"></div>
+    <div id="cursor-particles" class="cursor-particles"></div>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/language-details.js"></script>
+</body>
+</html>
+
+
+
+
+

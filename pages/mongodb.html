@@ -1,0 +1,805 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MongoDB | プログラミング言語図鑑</title>
+    <link rel="icon" type="image/png" href="../assets/icons/book.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../css/main.css" />
+    <style>
+      /* Detail page specific styles */
+      .detail-main {
+        padding-top: 120px;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding-left: 2rem;
+        padding-right: 2rem;
+      }
+
+      .detail-header {
+        text-align: center;
+        margin-bottom: 3rem;
+        padding: 2rem;
+        border: 2px solid #00ff41;
+        background: rgba(0, 255, 65, 0.05);
+        box-shadow: 0 0 30px rgba(0, 255, 65, 0.3);
+      }
+
+      .detail-logo {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+        text-shadow: 0 0 20px #00ff41;
+      }
+
+      .detail-title {
+        font-size: 3rem;
+        color: #00ff41;
+        text-shadow: 0 0 20px #00ff41;
+        margin-bottom: 0.5rem;
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      .detail-subtitle {
+        font-size: 1.2rem;
+        color: #00cc33;
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      .detail-section {
+        margin-bottom: 3rem;
+        padding: 2rem;
+        border: 2px solid #00ff41;
+        background: rgba(0, 0, 0, 0.8);
+        box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+      }
+
+      .detail-section h2 {
+        color: #00ff41;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        text-shadow: 0 0 10px #00ff41;
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      .detail-section h2::before {
+        content: "// ";
+        color: #00cc33;
+      }
+
+      .info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+
+      .info-item {
+        padding: 1rem;
+        border: 1px solid #00ff41;
+        background: rgba(0, 255, 65, 0.05);
+      }
+
+      .info-label {
+        color: #00cc33;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      .info-value {
+        color: #00ff41;
+        font-weight: 600;
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      .features-list {
+        list-style: none;
+      }
+
+      .features-list li {
+        padding: 0.5rem 0;
+        color: #00cc33;
+        border-bottom: 1px solid rgba(0, 255, 65, 0.2);
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      .features-list li::before {
+        content: "> ";
+        color: #00ff41;
+        font-weight: bold;
+      }
+
+      .code-block {
+        background: rgba(0, 0, 0, 0.9);
+        border: 2px solid #00ff41;
+        padding: 1.5rem;
+        margin: 1rem 0;
+        overflow-x: auto;
+        box-shadow: inset 0 0 20px rgba(0, 255, 65, 0.1);
+      }
+
+      .code-block pre {
+        color: #00ff41;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.9rem;
+      }
+
+      .uses-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+      }
+
+      .use-item {
+        padding: 1rem;
+        border: 1px solid #00ff41;
+        background: rgba(0, 255, 65, 0.05);
+        text-align: center;
+        color: #00cc33;
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      .back-link {
+        display: inline-block;
+        padding: 1rem 2rem;
+        background: rgba(0, 255, 65, 0.1);
+        border: 2px solid #00ff41;
+        color: #00ff41;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      .back-link:hover {
+        background: rgba(0, 255, 65, 0.2);
+        box-shadow: 0 0 25px rgba(0, 255, 65, 0.5);
+        transform: scale(1.05);
+      }
+
+      @media (max-width: 768px) {
+        .detail-main {
+          padding-left: 1rem;
+          padding-right: 1rem;
+        }
+
+        .detail-title {
+          font-size: 2rem;
+        }
+
+        .detail-section {
+          padding: 1rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <div class="container">
+        <div class="header-content">
+          <div class="logo">
+            <div class="logo-icon">💻</div>
+            <div class="logo-text">
+              <h1
+                data-ja="プログラミング言語図鑑"
+                data-en="Programming Language Encyclopedia"
+              >
+                プログラミング言語図鑑
+              </h1>
+              <p
+                data-ja="プログラミング言語図鑑"
+                data-en="Programming Language Encyclopedia"
+              >
+                Programming Language Encyclopedia
+              </p>
+            </div>
+          </div>
+
+          <div class="search-container">
+            <input
+              type="text"
+              id="search-input"
+              placeholder="言語を検索..."
+              class="search-input"
+              data-ja="言語を検索..."
+              data-en="Search languages..."
+            />
+            <div class="search-icon">🔍</div>
+          </div>
+
+          <div class="header-controls">
+            <!-- Hacker Experience Button with Effects -->
+            <a href="../hacker.html" id="hacker-btn" class="hacker-btn">
+              <span class="hacker-icon">💀</span>
+              <span
+                class="hacker-text"
+                data-ja="ハッカー体験"
+                data-en="Hacker Experience"
+                >HACK</span
+              >
+              <div class="hacker-particles"></div>
+            </a>
+            <button
+              id="lang-toggle"
+              class="lang-toggle"
+              data-ja="🌐 EN"
+              data-en="🌐 JA"
+            >
+              🌐 EN
+            </button>
+            <button id="menu-toggle" class="menu-toggle">☰</button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Navigation Menu -->
+    <nav id="nav-menu" class="nav-menu">
+      <div class="nav-content">
+        <button id="nav-close" class="nav-close">✕</button>
+        <div class="nav-header">
+          <h2 data-ja="メニュー" data-en="Menu">メニュー</h2>
+        </div>
+        <ul class="nav-links">
+          <li>
+            <a
+              href="../index.html#home"
+              class="nav-link"
+              data-ja="🏠 ホーム"
+              data-en="🏠 Home"
+              >🏠 ホーム</a
+            >
+          </li>
+          <li>
+            <a
+              href="../index.html#categories"
+              class="nav-link"
+              data-ja="📂 カテゴリ"
+              data-en="📂 Categories"
+              >📂 カテゴリ</a
+            >
+          </li>
+          <li>
+            <a
+              href="../hacker.html"
+              class="nav-link"
+              data-ja="💀 ハッカー体験"
+              data-en="💀 Hacker Experience"
+              >💀 ハッカー体験</a
+            >
+          </li>
+          <li>
+            <a
+              href="../index.html#about"
+              class="nav-link"
+              data-ja="ℹ️ このサイトについて"
+              data-en="ℹ️ About this site"
+              >ℹ️ このサイトについて</a
+            >
+          </li>
+        </ul>
+        <div class="nav-categories">
+          <h3 data-ja="カテゴリ別に探索" data-en="Explore by Category">
+            カテゴリ別に探索
+          </h3>
+          <ul class="category-links">
+            <li>
+              <a
+                href="../index.html#app-development"
+                class="category-link"
+                data-category="app-development"
+                data-ja="📱 アプリ開発"
+                data-en="📱 App Development"
+                >📱 アプリ開発</a
+              >
+            </li>
+            <li>
+              <a
+                href="../index.html#server-side"
+                class="category-link"
+                data-category="server-side"
+                data-ja="🖥️ サーバーサイド"
+                data-en="🖥️ Server-side"
+                >🖥️ サーバーサイド</a
+              >
+            </li>
+            <li>
+              <a
+                href="../index.html#web-development"
+                class="category-link"
+                data-category="web-development"
+                data-ja="🌐 Web開発"
+                data-en="🌐 Web Development"
+                >🌐 Web開発</a
+              >
+            </li>
+            <li>
+              <a
+                href="../index.html#system"
+                class="category-link"
+                data-category="system"
+                data-ja="⚙️ システム"
+                data-en="⚙️ System"
+                >⚙️ システム</a
+              >
+            </li>
+            <li>
+              <a
+                href="../index.html#database"
+                class="category-link"
+                data-category="database"
+                data-ja="🗃️ データベース"
+                data-en="🗃️ Database"
+                >🗃️ データベース</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="detail-main">
+      <div class="detail-header">
+        <div class="detail-logo">
+          <img
+            src="../assets/logos/MongoDB.png"
+            alt="MongoDB"
+            style="width: 80px; height: 80px; object-fit: contain"
+          />
+        </div>
+        <h1 class="detail-title">MongoDB</h1>
+        <p
+          class="detail-subtitle"
+          data-ja="ドキュメント指向のNoSQLデータベース。JSONライクなデータ構造"
+          data-en="Document-oriented NoSQL database with JSON-like data structure"
+        >
+          ドキュメント指向のNoSQLデータベース。JSONライクなデータ構造
+        </p>
+      </div>
+
+      <div class="detail-section">
+        <h2 data-ja="基本情報" data-en="Basic Information">基本情報</h2>
+        <div class="info-grid">
+          <div class="info-item">
+            <div class="info-label" data-ja="開発者" data-en="Developer">
+              開発者
+            </div>
+            <div
+              class="info-value"
+              data-ja="MongoDB Inc."
+              data-en="MongoDB Inc."
+            >
+              MongoDB Inc.
+            </div>
+          </div>
+          <div class="info-item">
+            <div
+              class="info-label"
+              data-ja="初回リリース"
+              data-en="First Release"
+            >
+              初回リリース
+            </div>
+            <div class="info-value" data-ja="2009年" data-en="2009">2009年</div>
+          </div>
+          <div class="info-item">
+            <div class="info-label" data-ja="パラダイム" data-en="Paradigm">
+              パラダイム
+            </div>
+            <div
+              class="info-value"
+              data-ja="ドキュメント指向、NoSQL"
+              data-en="Document-oriented, NoSQL"
+            >
+              ドキュメント指向、NoSQL
+            </div>
+          </div>
+          <div class="info-item">
+            <div class="info-label" data-ja="難易度" data-en="Difficulty">
+              難易度
+            </div>
+            <div class="info-value" data-ja="簡単" data-en="Easy">簡単</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <h2 data-ja="特徴" data-en="Features">特徴</h2>
+        <ul class="features-list">
+          <li
+            data-ja="ドキュメント指向のNoSQLデータベース"
+            data-en="Document-oriented NoSQL database"
+          >
+            ドキュメント指向のNoSQLデータベース
+          </li>
+          <li
+            data-ja="JSONライクなBSONフォーマット"
+            data-en="JSON-like BSON format"
+          >
+            JSONライクなBSONフォーマット
+          </li>
+          <li data-ja="スキーマレス設計" data-en="Schema-less design">
+            スキーマレス設計
+          </li>
+          <li data-ja="高いスケーラビリティ" data-en="High scalability">
+            高いスケーラビリティ
+          </li>
+          <li
+            data-ja="水平スケーリング（シャーディング）"
+            data-en="Horizontal scaling (sharding)"
+          >
+            水平スケーリング（シャーディング）
+          </li>
+          <li data-ja="インデックス機能" data-en="Indexing capabilities">
+            インデックス機能
+          </li>
+          <li
+            data-ja="アグリゲーションフレームワーク"
+            data-en="Aggregation framework"
+          >
+            アグリゲーションフレームワーク
+          </li>
+        </ul>
+      </div>
+
+      <div class="detail-section">
+        <h2 data-ja="主な用途" data-en="Main Uses">主な用途</h2>
+        <div class="uses-grid">
+          <div
+            class="use-item"
+            data-ja="Webアプリケーション"
+            data-en="Web Applications"
+          >
+            Webアプリケーション
+          </div>
+          <div class="use-item" data-ja="ビッグデータ" data-en="Big Data">
+            ビッグデータ
+          </div>
+          <div
+            class="use-item"
+            data-ja="リアルタイムアプリ"
+            data-en="Real-time Apps"
+          >
+            リアルタイムアプリ
+          </div>
+          <div
+            class="use-item"
+            data-ja="コンテンツ管理"
+            data-en="Content Management"
+          >
+            コンテンツ管理
+          </div>
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <h2 data-ja="サンプルコード" data-en="Sample Code">サンプルコード</h2>
+        <div class="code-block">
+          <pre>
+// MongoDB Shell コマンド
+
+// データベース作成・選択
+use myDatabase
+
+// コレクション作成
+db.createCollection("users")
+db.createCollection("products")
+
+// ドキュメント挿入
+db.users.insertOne({
+  name: "田中太郎",
+  email: "tanaka@example.com",
+  age: 30,
+  address: {
+    city: "東京",
+    zipcode: "100-0001"
+  },
+  interests: ["プログラミング", "読書", "旅行"],
+  created_at: new Date()
+})
+
+// 複数ドキュメント挿入
+db.products.insertMany([
+  {
+    name: "ノートパソコン",
+    price: 120000,
+    category: "電子機器",
+    stock: 10,
+    specs: {
+      cpu: "Core i7",
+      ram: "16GB",
+      storage: "512GB SSD"
+    }
+  },
+  {
+    name: "スマートフォン",
+    price: 80000,
+    category: "電子機器",
+    stock: 15,
+    specs: {
+      screen: "6.1インチ",
+      camera: "12MP",
+      storage: "128GB"
+    }
+  },
+  {
+    name: "ヘッドフォン",
+    price: 15000,
+    category: "アクセサリー",
+    stock: 20
+  }
+])
+
+// ドキュメント検索
+// 全件取得
+db.users.find()
+
+// 条件指定
+db.products.find({ category: "電子機器" })
+
+// 複合条件
+db.products.find({
+  category: "電子機器",
+  price: { $gt: 100000 }
+})
+
+// プロジェクション（フィールド選択）
+db.products.find(
+  { category: "電子機器" },
+  { name: 1, price: 1, _id: 0 }
+)
+
+// ソート
+db.products.find().sort({ price: -1 })
+
+// 制限
+db.products.find().limit(2)
+
+// スキップ
+db.products.find().skip(1).limit(2)
+
+// ドキュメント更新
+// 単一ドキュメント更新
+db.products.updateOne(
+  { name: "ノートパソコン" },
+  { $set: { price: 110000, stock: 8 } }
+)
+
+// 複数ドキュメント更新
+db.products.updateMany(
+  { category: "電子機器" },
+  { $inc: { stock: -1 } }
+)
+
+// ドキュメント削除
+db.products.deleteOne({ name: "ヘッドフォン" })
+db.products.deleteMany({ stock: { $lte: 0 } })
+
+// インデックス作成
+db.products.createIndex({ name: 1 })
+db.products.createIndex({ category: 1, price: -1 })
+
+// 複合クエリ
+db.products.find({
+  $and: [
+    { category: "電子機器" },
+    { price: { $gte: 50000 } },
+    { stock: { $gt: 0 } }
+  ]
+})
+
+// OR条件
+db.products.find({
+  $or: [
+    { category: "電子機器" },
+    { price: { $lt: 20000 } }
+  ]
+})
+
+// 正規表現検索
+db.products.find({
+  name: { $regex: "フォン", $options: "i" }
+})
+
+// 配列検索
+db.users.find({
+  interests: "プログラミング"
+})
+
+// ネストされたフィールド検索
+db.users.find({
+  "address.city": "東京"
+})
+
+// アグリゲーション
+db.products.aggregate([
+  { $match: { category: "電子機器" } },
+  { $group: {
+      _id: "$category",
+      count: { $sum: 1 },
+      avgPrice: { $avg: "$price" },
+      totalStock: { $sum: "$stock" }
+    }
+  }
+])
+
+// 複雑なアグリゲーションパイプライン
+db.products.aggregate([
+  { $match: { stock: { $gt: 0 } } },
+  { $group: {
+      _id: "$category",
+      count: { $sum: 1 },
+      avgPrice: { $avg: "$price" },
+      items: { $push: { name: "$name", price: "$price" } }
+    }
+  },
+  { $sort: { avgPrice: -1 } }
+])
+
+// Node.jsでのMongoDBの使用例
+// MongoDB Node.js Driver
+const { MongoClient } = require('mongodb');
+
+// 接続URL
+const url = 'mongodb://localhost:27017';
+const client = new MongoClient(url);
+
+// データベース名
+const dbName = 'myDatabase';
+
+async function main() {
+  try {
+    // 接続
+    await client.connect();
+    console.log('MongoDBに接続しました');
+    
+    const db = client.db(dbName);
+    const usersCollection = db.collection('users');
+    
+    // ドキュメント挿入
+    const insertResult = await usersCollection.insertOne({
+      name: '佐藤花子',
+      email: 'sato@example.com',
+      age: 25
+    });
+    console.log('挿入されたID:', insertResult.insertedId);
+    
+    // ドキュメント検索
+    const findResult = await usersCollection.find({}).toArray();
+    console.log('検索結果:', findResult);
+    
+    // ドキュメント更新
+    const updateResult = await usersCollection.updateOne(
+      { name: '佐藤花子' },
+      { $set: { age: 26 } }
+    );
+    console.log('更新されたドキュメント数:', updateResult.modifiedCount);
+    
+    // ドキュメント削除
+    const deleteResult = await usersCollection.deleteOne({ name: '佐藤花子' });
+    console.log('削除されたドキュメント数:', deleteResult.deletedCount);
+    
+  } finally {
+    // 接続を閉じる
+    await client.close();
+  }
+}
+
+main().catch(console.error);
+
+// Mongoose (ODM) の使用例
+const mongoose = require('mongoose');
+
+// 接続
+mongoose.connect('mongodb://localhost:27017/myDatabase', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
+
+// スキーマ定義
+const userSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
+  age: { type: Number, min: 0 },
+  address: {
+    city: String,
+    zipcode: String
+  },
+  interests: [String],
+  created_at: { type: Date, default: Date.now }
+});
+
+// モデル作成
+const User = mongoose.model('User', userSchema);
+
+// ドキュメント作成と保存
+async function createUser() {
+  try {
+    const user = new User({
+      name: '山田太郎',
+      email: 'yamada@example.com',
+      age: 35,
+      address: {
+        city: '大阪',
+        zipcode: '530-0001'
+      },
+      interests: ['スポーツ', '音楽']
+    });
+    
+    const savedUser = await user.save();
+    console.log('保存されたユーザー:', savedUser);
+  } catch (err) {
+    console.error('エラー:', err);
+  }
+}
+
+// ドキュメント検索
+async function findUsers() {
+  try {
+    // 全件取得
+    const allUsers = await User.find();
+    console.log('全ユーザー:', allUsers);
+    
+    // 条件指定
+    const youngUsers = await User.find({ age: { $lt: 30 } })
+      .select('name email age')
+      .sort({ age: 1 });
+    console.log('若いユーザー:', youngUsers);
+  } catch (err) {
+    console.error('エラー:', err);
+  }
+}
+
+createUser();
+findUsers();
+                </pre
+          >
+        </div>
+      </div>
+
+      <div class="detail-section">
+        <h2 data-ja="人気度" data-en="Popularity">人気度</h2>
+        <div class="info-grid">
+          <div class="info-item">
+            <div
+              class="info-label"
+              data-ja="国内人気度"
+              data-en="Domestic Popularity"
+            >
+              国内人気度
+            </div>
+            <div class="info-value">★★★★☆</div>
+          </div>
+          <div class="info-item">
+            <div
+              class="info-label"
+              data-ja="世界人気度"
+              data-en="Global Popularity"
+            >
+              世界人気度
+            </div>
+            <div class="info-value">★★★★☆</div>
+          </div>
+        </div>
+      </div>
+
+      <a href="../index.html" class="back-link">← 一覧に戻る</a>
+    </main>
+
+    <!-- Enhanced Custom Cursor -->
+    <div id="cursor" class="cursor"></div>
+    <div id="cursor-trail" class="cursor-trail"></div>
+    <div id="cursor-glow" class="cursor-glow"></div>
+    <div id="cursor-particles" class="cursor-particles"></div>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/language-details.js"></script>
+  </body>
+</html>
