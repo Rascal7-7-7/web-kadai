@@ -709,13 +709,31 @@ class ProgrammingLanguageEncyclopedia {
 
   showLoadingScreen() {
     const loadingScreen = document.getElementById("loading-screen");
-    if (loadingScreen) {
+    if (!loadingScreen) return;
+
+    // セッションストレージで初回アクセスかどうかを判定
+    const hasVisited = sessionStorage.getItem("hasVisitedIndex");
+    const skipInitialLoading = sessionStorage.getItem("skipInitialLoading");
+
+    if (!hasVisited && !skipInitialLoading) {
+      // 初回アクセス時のみローディング画面を表示
       setTimeout(() => {
         loadingScreen.classList.add("fade-out");
         setTimeout(() => {
           loadingScreen.style.display = "none";
         }, 800);
       }, 2000);
+
+      // 初回アクセスフラグを設定
+      sessionStorage.setItem("hasVisitedIndex", "true");
+    } else {
+      // 2回目以降または詳細ページからの戻りはすぐにローディング画面を非表示
+      loadingScreen.style.display = "none";
+
+      // フラグをクリア（次回の正常なアクセス用）
+      if (skipInitialLoading) {
+        sessionStorage.removeItem("skipInitialLoading");
+      }
     }
   }
 
@@ -1372,7 +1390,23 @@ class ProgrammingLanguageEncyclopedia {
 
   // マトリックス風ページ遷移
   navigateWithMatrixEffect(url, languageName) {
-    // 遷移オーバーレイを作成
+    // index.htmlへの戻りかどうかを判定（より正確な判定）
+    const isReturningToIndex =
+      url.includes("index.html") ||
+      url === "../index.html" ||
+      url === "./index.html" ||
+      url === "/" ||
+      url === "" ||
+      url === "#";
+
+    if (isReturningToIndex) {
+      // index.htmlへの戻りの場合は軽量な遷移を使用し、初回ローディングをスキップするフラグを設定
+      sessionStorage.setItem("skipInitialLoading", "true");
+      this.navigateWithLightTransition(url, languageName);
+      return;
+    }
+
+    // 通常のマトリックス遷移（詳細ページへの移動）
     const overlay = document.createElement("div");
     overlay.className = "matrix-transition-overlay";
 
@@ -1417,6 +1451,57 @@ class ProgrammingLanguageEncyclopedia {
     setTimeout(() => {
       window.location.href = url;
     }, 600);
+  }
+
+  // 軽量なページ遷移（index.htmlへの戻り用）
+  navigateWithLightTransition(url, languageName) {
+    // 軽量なフェード効果
+    const overlay = document.createElement("div");
+    overlay.style.cssText = `
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(10, 10, 10, 0.9); z-index: 9999; opacity: 0;
+      transition: opacity 0.3s ease;
+      display: flex; align-items: center; justify-content: center;
+      color: #00ff41; font-family: 'JetBrains Mono', monospace;
+      font-size: 1.1rem;
+    `;
+
+    // 言語に応じたメッセージ
+    const returnMessage =
+      this.currentLanguage === "ja" ? "戻っています..." : "Returning...";
+
+    overlay.innerHTML = `
+      <div style="text-align: center;">
+        <div style="margin-bottom: 1rem; animation: pulse 1s infinite;">
+          ${
+            this.currentLanguage === "ja"
+              ? "プログラミング言語図鑑"
+              : "Programming Language Encyclopedia"
+          }
+        </div>
+        <div style="font-size: 0.9rem; opacity: 0.7;">
+          ${returnMessage}
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(overlay);
+
+    // フェードイン
+    setTimeout(() => {
+      overlay.style.opacity = "1";
+    }, 50);
+
+    // ページ本体を軽くフェードアウト
+    setTimeout(() => {
+      document.body.style.opacity = "0.8";
+      document.body.style.transition = "opacity 0.2s ease";
+    }, 150);
+
+    // 早めのページ遷移
+    setTimeout(() => {
+      window.location.href = url;
+    }, 300);
   }
 
   // マトリックス風コード雨を生成

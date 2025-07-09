@@ -1441,6 +1441,18 @@ body::before {
 }
 
 /* アニメーション定義 */
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 @keyframes matrixGrid {
   0% {
     transform: translateY(0);
@@ -2120,6 +2132,239 @@ body::before {
 }
 
 /* アニメーション定義 */
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes matrixGrid {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(20px);
+  }
+}
+
+@keyframes cursorBlink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes cursorHoverPulse {
+  0%,
+  100% {
+    transform: scale(1.8);
+  }
+  50% {
+    transform: scale(2.2);
+  }
+}
+
+@keyframes trailPulse {
+  0%,
+  100% {
+    opacity: 0.8;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.3);
+  }
+}
+
+@keyframes particleFloat {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-50px) scale(0);
+    opacity: 0;
+  }
+}
+
+@keyframes binaryFade {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes scanlines {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(4px);
+  }
+}
+
+@keyframes logoGlitch {
+  0%,
+  90%,
+  100% {
+    transform: translate(0);
+  }
+  10% {
+    transform: translate(-2px, 2px);
+  }
+  20% {
+    transform: translate(2px, -2px);
+  }
+  30% {
+    transform: translate(-2px, -2px);
+  }
+  40% {
+    transform: translate(2px, 2px);
+  }
+  50% {
+    transform: translate(-2px, 2px);
+  }
+  60% {
+    transform: translate(2px, -2px);
+  }
+  70% {
+    transform: translate(-2px, -2px);
+  }
+  80% {
+    transform: translate(2px, 2px);
+  }
+}
+
+@keyframes textGlitch {
+  0%,
+  95%,
+  100% {
+    transform: translate(0);
+    filter: hue-rotate(0deg);
+  }
+  5% {
+    transform: translate(2px, 0);
+    filter: hue-rotate(90deg);
+  }
+  10% {
+    transform: translate(-2px, 0);
+    filter: hue-rotate(180deg);
+  }
+  15% {
+    transform: translate(0, 2px);
+    filter: hue-rotate(270deg);
+  }
+  20% {
+    transform: translate(0, -2px);
+    filter: hue-rotate(360deg);
+  }
+}
+
+@keyframes logoFlicker {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.8;
+  }
+  75% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 0.9;
+  }
+}
+
+@keyframes titleGlitch {
+  0%,
+  90%,
+  100% {
+    transform: translate(0);
+    text-shadow: 0 0 20px #00ff41;
+  }
+  10% {
+    transform: translate(-2px, 2px);
+    text-shadow: 2px 0 #ff0040, -2px 0 #00ff41;
+  }
+  20% {
+    transform: translate(2px, -2px);
+    text-shadow: -2px 0 #ff0040, 2px 0 #00ff41;
+  }
+}
+
+@keyframes dotMatrix {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+    box-shadow: 0 0 5px #00ff41;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0.7;
+    box-shadow: 0 0 15px #00ff41;
+  }
+}
+
+@keyframes binaryRain {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100vh);
+  }
+}
+
+@keyframes hackerGlow {
+  0%,
+  100% {
+    box-shadow: 0 0 15px rgba(255, 0, 64, 0.3),
+      inset 0 0 15px rgba(255, 0, 64, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(255, 0, 64, 0.5),
+      inset 0 0 25px rgba(255, 0, 64, 0.2);
+  }
+}
+
+@keyframes skullBlink {
+  0%,
+  90%,
+  100% {
+    opacity: 1;
+  }
+  95% {
+    opacity: 0.3;
+  }
+}
+
+@keyframes particleFlow {
+  0% {
+    transform: translateY(0) translateX(-100%);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-20px) translateX(100%);
+    opacity: 0;
+  }
+}
+
 @keyframes matrixSlideIn {
   0% {
     opacity: 0;
@@ -2138,3 +2383,169 @@ body::before {
     transform: translateX(-100%);
   }
 }
+
+@keyframes matrixTextGlow {
+  0% {
+    text-shadow: 0 0 5px #00ff41;
+  }
+  100% {
+    text-shadow: 0 0 20px #00ff41, 0 0 30px #00cc33;
+  }
+}
+
+@keyframes matrixProgress {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+@keyframes matrixRain {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+  .cursor,
+  .cursor-trail,
+  .cursor-glow,
+  .cursor-particles {
+    display: none;
+  }
+
+  .nav-menu {
+    width: 100%;
+    right: -100%;
+  }
+
+  .header-content {
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .search-container {
+    order: 3;
+    flex-basis: 100%;
+  }
+
+  .hero-title {
+    font-size: 2rem;
+  }
+
+  .languages-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-content {
+    margin: 1rem;
+    max-height: 95vh;
+  }
+
+  .modal-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .modal-title {
+    font-size: 2rem;
+  }
+
+  .hacker-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 15px;
+  }
+
+  .hero {
+    padding: 2rem 0;
+  }
+
+  .about-content {
+    padding: 2rem;
+  }
+
+  .modal-body {
+    padding: 1.5rem;
+  }
+}
+
+/* スクロールバーのスタイル */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+  border: 1px solid #00ff41;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #00ff41, #00cc33);
+  border-radius: 0;
+  box-shadow: 0 0 10px #00ff41;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #00ff41, #00ff00);
+  box-shadow: 0 0 15px #00ff41;
+}
+
+/* 選択範囲のスタイル */
+::selection {
+  background: rgba(0, 255, 65, 0.3);
+  color: #00ff41;
+}
+
+::-moz-selection {
+  background: rgba(0, 255, 65, 0.3);
+  color: #00ff41;
+}
+
+/* 追加のターミナルエフェクト */
+.terminal-effect {
+  position: relative;
+}
+
+.terminal-effect::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 255, 65, 0.1) 2px,
+    rgba(0, 255, 65, 0.1) 4px
+  );
+  pointer-events: none;
+  animation: scanlines 2s linear infinite;
+}
+
+/* グリッチテキストエフェクト */
+.glitch {
+  position: relative;
+  color: #00ff41;
+  font-family: "JetBrains Mono", monospace;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0

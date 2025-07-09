@@ -451,6 +451,9 @@ class LanguageDetailsEnhancer {
         }
       }
     });
+
+    // 戻るリンクのマトリックス遷移を設定
+    this.setupMatrixBackNavigation();
   }
 
   toggleLanguage() {
@@ -640,6 +643,74 @@ class LanguageDetailsEnhancer {
         }.bind(this);
       }
     }
+  }
+
+  // 戻るリンク用のマトリックス効果を追加
+  setupMatrixBackNavigation() {
+    const backLinks = document.querySelectorAll(
+      '.back-link, [href*="index.html"]'
+    );
+    backLinks.forEach((link) => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        const url = link.href || "../index.html";
+        this.navigateWithLightTransition(url);
+      });
+    });
+  }
+
+  // 軽量なページ遷移（index.htmlへの戻り用）
+  navigateWithLightTransition(url) {
+    // 軽量なフェード効果
+    const overlay = document.createElement("div");
+    overlay.style.cssText = `
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(10, 10, 10, 0.9); z-index: 9999; opacity: 0;
+      transition: opacity 0.3s ease;
+      display: flex; align-items: center; justify-content: center;
+      color: #00ff41; font-family: 'JetBrains Mono', monospace;
+      font-size: 1.1rem;
+    `;
+
+    // 言語に応じたメッセージ
+    const returnMessage =
+      this.currentLanguage === "ja" ? "戻っています..." : "Returning...";
+
+    overlay.innerHTML = `
+      <div style="text-align: center;">
+        <div style="margin-bottom: 1rem; animation: pulse 1s infinite;">
+          ${
+            this.currentLanguage === "ja"
+              ? "プログラミング言語図鑑"
+              : "Programming Language Encyclopedia"
+          }
+        </div>
+        <div style="font-size: 0.9rem; opacity: 0.7;">
+          ${returnMessage}
+        </div>
+      </div>
+    `;
+
+    document.body.appendChild(overlay);
+
+    // index.htmlへの戻りであることをフラグで設定
+    sessionStorage.setItem("skipInitialLoading", "true");
+
+    // フェードイン
+    setTimeout(() => {
+      overlay.style.opacity = "1";
+    }, 50);
+
+    // ページ本体を軽くフェードアウト
+    setTimeout(() => {
+      document.body.style.opacity = "0.8";
+      document.body.style.transition = "opacity 0.2s ease";
+    }, 150);
+
+    // 早めのページ遷移
+    setTimeout(() => {
+      window.location.href = url;
+    }, 300);
   }
 }
 
