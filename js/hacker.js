@@ -240,7 +240,7 @@ class HackerSimulator {
   }
 
   setupHelpPanel() {
-    // Help panel is already in the HTML
+    // ヘルプパネルはHTMLに既に存在
   }
 
   setupCursor() {
@@ -265,7 +265,7 @@ class HackerSimulator {
       cursor.style.top = mouseY + "px";
     });
 
-    // Smooth trail animation
+    // スムーズなトレイルアニメーション
     const animateTrail = () => {
       trailX += (mouseX - trailX) * 0.1;
       trailY += (mouseY - trailY) * 0.1;
@@ -283,7 +283,7 @@ class HackerSimulator {
     };
     animateTrail();
 
-    // Hover effects
+    // ホバーエフェクト
     document.addEventListener("mouseover", (e) => {
       if (
         e.target.matches(
@@ -411,7 +411,7 @@ class HackerSimulator {
         `Used ${tool.title.en}`
       );
 
-      // Initialize tool-specific functionality
+      // ツール固有の機能を初期化
       if (toolName === "crypto") {
         this.initCryptoTool();
       } else if (toolName === "password") {
@@ -1170,9 +1170,9 @@ root@hacker-system:~# `;
         `;
   }
 
-  // Tool-specific initialization methods
+  // ツール固有の初期化メソッド
   initPasswordTool() {
-    // Add event listeners for hash samples
+    // ハッシュサンプル用のイベントリスナーを追加
     document.querySelectorAll(".hash-sample").forEach((sample) => {
       sample.addEventListener("click", (e) => {
         e.preventDefault();
@@ -1184,13 +1184,13 @@ root@hacker-system:~# `;
   }
 
   initCryptoTool() {
-    // Set default mode to encrypt
+    // デフォルトモードを暗号化に設定
     this.setCryptoMode("encrypt");
 
-    // Show/hide shift amount based on selected method
+    // 選択された方法に基づいてシフト量の表示/非表示を切り替え
     this.updateCryptoInterface();
 
-    // Add event listeners for crypto samples
+    // 暗号化サンプル用のイベントリスナーを追加
     document.querySelectorAll(".crypto-sample").forEach((sample) => {
       sample.addEventListener("click", (e) => {
         e.preventDefault();
@@ -1203,7 +1203,7 @@ root@hacker-system:~# `;
   }
 
   initSQLTool() {
-    // Add event listeners for SQL samples
+    // SQLサンプル用のイベントリスナーを追加
     document.querySelectorAll(".sql-sample").forEach((sample) => {
       sample.addEventListener("click", (e) => {
         e.preventDefault();
@@ -1214,7 +1214,7 @@ root@hacker-system:~# `;
     });
   }
 
-  // Tool-specific methods
+  // ツール固有のメソッド
   generateHash() {
     const password = document.getElementById("password-input")?.value;
     const hashType = document.getElementById("hash-type")?.value;
@@ -1224,10 +1224,10 @@ root@hacker-system:~# `;
 
     let hash = "";
 
-    // Simple hash simulation (not real cryptographic hashing)
+    // シンプルなハッシュシミュレーション（実際の暗号化ハッシュではありません）
     switch (hashType) {
       case "md5":
-        // For demo purposes, we'll use a simple hash representation
+        // デモ目的で、シンプルなハッシュ表現を使用します
         hash = this.simulateMD5(password);
         break;
       case "sha1":
@@ -1238,7 +1238,7 @@ root@hacker-system:~# `;
         break;
     }
 
-    // Store the hash for cracking
+    // クラッキング用にハッシュを保存
     this.passwordHashes[password] = hash;
 
     const hashText = this.currentLanguage === "ja" ? "ハッシュ" : "Hash";
@@ -1246,14 +1246,14 @@ root@hacker-system:~# `;
   }
 
   simulateMD5(text) {
-    // This is not a real MD5 hash, just a simulation for the demo
+    // これは本物のMD5ハッシュではなく、デモ用のシミュレーションです
     if (text === "password") return "5f4dcc3b5aa765d61d8327deb882cf99";
     if (text === "admin") return "21232f297a57a5a743894a0e4a801fc3";
     if (text === "123456") return "e10adc3949ba59abbe56e057f20f883e";
     if (text === "password123") return "482c811da5d5b4bc6d497ffa98491e38";
     if (text === "f15dfvc3") return "456789abcdef0123456789abcdef0123";
 
-    // Generate a fake MD5-like hash for demo purposes
+    // デモ目的で偽のMD5ライクハッシュを生成
     let hash = "";
     const chars = "0123456789abcdef";
     for (let i = 0; i < 32; i++) {
@@ -1263,7 +1263,7 @@ root@hacker-system:~# `;
   }
 
   simulateSHA1(text) {
-    // Generate a fake SHA1-like hash for demo purposes
+    // デモ目的で偽のSHA1ライクハッシュを生成
     let hash = "";
     const chars = "0123456789abcdef";
     for (let i = 0; i < 40; i++) {
@@ -1273,7 +1273,7 @@ root@hacker-system:~# `;
   }
 
   simulateSHA256(text) {
-    // Generate a fake SHA256-like hash for demo purposes
+    // デモ目的で偽のSHA256ライクハッシュを生成
     let hash = "";
     const chars = "0123456789abcdef";
     for (let i = 0; i < 64; i++) {
@@ -1321,7 +1321,7 @@ root@hacker-system:~# `;
         progressValue = 100;
         clearInterval(interval);
 
-        // Find the password that matches this hash
+        // このハッシュにマッチするパスワードを見つける
         let foundPassword = null;
         for (const [password, storedHash] of Object.entries(
           this.passwordHashes
@@ -1345,7 +1345,7 @@ root@hacker-system:~# `;
                         <div style="color: #00ff00;">${passwordText}: ${foundPassword}</div>
                     `;
         } else {
-          // Fallback for demo purposes
+          // デモ目的のフォールバック
           const fallbackPassword =
             hash === "5f4dcc3b5aa765d61d8327deb882cf99"
               ? "password"
@@ -1505,7 +1505,7 @@ root@hacker-system:~# `;
       if (index < steps.length) {
         results.innerHTML += `${steps[index]}\n`;
 
-        // Add success message for each step
+        // 各ステップに成功メッセージを追加
         setTimeout(() => {
           const successText =
             this.currentLanguage === "ja" ? "成功" : "SUCCESS";
@@ -1568,7 +1568,7 @@ root@hacker-system:~# `;
         this.currentLanguage === "ja" ? "復号化" : "Decrypt";
     }
 
-    // Store the current mode
+    // 現在のモードを保存
     this.cryptoMode = mode;
   }
 
@@ -1578,7 +1578,7 @@ root@hacker-system:~# `;
 
     if (!shiftContainer) return;
 
-    // Only show shift amount for Caesar cipher
+    // シーザー暗号の場合のみシフト量を表示
     if (method === "caesar") {
       shiftContainer.style.display = "block";
     } else {
@@ -1594,10 +1594,10 @@ root@hacker-system:~# `;
 
     cryptoText.value = text;
 
-    // Set the appropriate method
+    // 適切なメソッドを設定
     if (method === "caesar") {
       cryptoMethod.value = "caesar";
-      // Set decrypt mode
+      // 復号化モードを設定
       this.setCryptoMode("decrypt");
     } else if (method === "base64") {
       cryptoMethod.value = "base64";
@@ -2124,7 +2124,7 @@ int main() {
 ⚠️ これは教育目的のシミュレーションです
             `
           : `
-// Virus Simulation Code (Educational Purposes Only)
+// ウイルス シミュレーション コード (教育目的のみ)
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -2133,7 +2133,7 @@ int main() {
     printf("🦠 Virus Simulation\\n");
     printf("Target OS: ${os}\\n");
     
-    // File infection simulation
+    // ファイル感染シミュレーション
     printf("📁 Scanning executable files...\\n");
     printf("🔍 .exe files found: 127\\n");
     printf("💉 Starting infection process...\\n");
@@ -2182,7 +2182,7 @@ trojan.establish_backdoor()
 trojan.steal_data()
             `
           : `
-// Trojan Horse Simulation
+// トロイの木馬 シミュレーション
 import os
 import socket
 import subprocess
@@ -2242,7 +2242,7 @@ class RansomwareSimulator {
 ⚠️ 実際のランサムウェア作成は重大な犯罪です
             `
           : `
-// Ransomware Simulation
+// ランサムウェア シミュレーション
 using System;
 using System.IO;
 using System.Security.Cryptography;
@@ -2252,7 +2252,7 @@ class RansomwareSimulator {
         Console.WriteLine("🔒 Ransomware Simulation");
         Console.WriteLine("Target: ${os}");
         
-        // File encryption simulation
+        // ファイル暗号化シミュレーション
         string[] targetExtensions = {".doc", ".pdf", ".jpg", ".mp4"};
         
         Console.WriteLine("🔍 Starting file scan...");

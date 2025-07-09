@@ -10,9 +10,175 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="../css/main.css" />
+    <style>
+      .detail-main {
+        padding-top: 120px;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding-left: 2rem;
+        padding-right: 2rem;
+      }
+
+      .detail-header {
+        text-align: center;
+        margin-bottom: 3rem;
+        padding: 2rem;
+        border: 2px solid #00ff41;
+        background: rgba(0, 255, 65, 0.05);
+        box-shadow: 0 0 30px rgba(0, 255, 65, 0.3);
+      }
+
+      .detail-logo {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+        text-shadow: 0 0 20px #00ff41;
+      }
+
+      .detail-title {
+        font-size: 3rem;
+        color: #00ff41;
+        text-shadow: 0 0 20px #00ff41;
+        margin-bottom: 0.5rem;
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      .detail-subtitle {
+        font-size: 1.2rem;
+        color: #00cc33;
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      .detail-section {
+        margin-bottom: 3rem;
+        padding: 2rem;
+        border: 2px solid #00ff41;
+        background: rgba(0, 0, 0, 0.8);
+        box-shadow: 0 0 20px rgba(0, 255, 65, 0.3);
+      }
+
+      .detail-section h2 {
+        color: #00ff41;
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        text-shadow: 0 0 10px #00ff41;
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      .detail-section h2::before {
+        content: "// ";
+        color: #00cc33;
+      }
+
+      .info-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+
+      .info-item {
+        padding: 1rem;
+        border: 1px solid #00ff41;
+        background: rgba(0, 255, 65, 0.05);
+      }
+
+      .info-label {
+        color: #00cc33;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      .info-value {
+        color: #00ff41;
+        font-weight: 600;
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      .features-list {
+        list-style: none;
+      }
+
+      .features-list li {
+        padding: 0.5rem 0;
+        color: #00cc33;
+        border-bottom: 1px solid rgba(0, 255, 65, 0.2);
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      .features-list li::before {
+        content: "> ";
+        color: #00ff41;
+        font-weight: bold;
+      }
+
+      .code-block {
+        background: rgba(0, 0, 0, 0.9);
+        border: 2px solid #00ff41;
+        padding: 1.5rem;
+        margin: 1rem 0;
+        overflow-x: auto;
+        box-shadow: inset 0 0 20px rgba(0, 255, 65, 0.1);
+      }
+
+      .code-block pre {
+        color: #00ff41;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.9rem;
+      }
+
+      .uses-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+      }
+
+      .use-item {
+        padding: 1rem;
+        border: 1px solid #00ff41;
+        background: rgba(0, 255, 65, 0.05);
+        text-align: center;
+        color: #00cc33;
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      .back-link {
+        display: inline-block;
+        padding: 1rem 2rem;
+        background: rgba(0, 255, 65, 0.1);
+        border: 2px solid #00ff41;
+        color: #00ff41;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        box-shadow: 0 0 15px rgba(0, 255, 65, 0.3);
+        font-family: "JetBrains Mono", monospace;
+      }
+
+      .back-link:hover {
+        background: rgba(0, 255, 65, 0.2);
+        box-shadow: 0 0 25px rgba(0, 255, 65, 0.5);
+        transform: scale(1.05);
+      }
+
+      @media (max-width: 768px) {
+        .detail-main {
+          padding-left: 1rem;
+          padding-right: 1rem;
+        }
+
+        .detail-title {
+          font-size: 2rem;
+        }
+
+        .detail-section {
+          padding: 1rem;
+        }
+      }
+    </style>
   </head>
   <body>
-    <!-- Header -->
+    <!-- ヘッダー -->
     <header class="header">
       <div class="container">
         <div class="header-content">
@@ -35,7 +201,7 @@
           </div>
 
           <div class="header-controls">
-            <!-- Hacker Experience Button with Effects -->
+            <!-- ハッカー体験ボタンとエフェクト -->
             <a href="../hacker.html" id="hacker-btn" class="hacker-btn">
               <span class="hacker-icon">💀</span>
               <span class="hacker-text">HACK</span>
@@ -55,7 +221,7 @@
       </div>
     </header>
 
-    <!-- Navigation Menu -->
+    <!-- ナビゲーションメニュー -->
     <nav id="nav-menu" class="nav-menu">
       <div class="nav-content">
         <button id="nav-close" class="nav-close">✕</button>
@@ -151,7 +317,7 @@
       </div>
     </nav>
 
-    <!-- Main Content -->
+    <!-- メインコンテンツ -->
     <main class="detail-main">
       <div class="detail-header">
         <div class="detail-logo">
@@ -352,7 +518,7 @@ public class Main {
       >
     </main>
 
-    <!-- Enhanced Custom Cursor -->
+    <!-- 拡張カスタムカーソル -->
     <div id="cursor" class="cursor"></div>
     <div id="cursor-trail" class="cursor-trail"></div>
     <div id="cursor-glow" class="cursor-glow"></div>
